@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="res/images/hp-logo.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <link rel="stylesheet" href="frontpageStyle.css" />
+    <title>Navigation System</title>
+  </head>
+  <body>
+    <nav>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <div class="brand-container">
+        <img src="res/images/hp-logo.png" width="49" />
+        <h2 class="brand-title">Palanyag Cemetery Digital Navigation System</h2>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contacts</a></li>
+      </ul>
+    </div>
+
+    <div class="main-content" id="main-content">
+      <div class="login">
+        <img id="pqLogo" src="res/images/pqLogo.png" alt="" />
+        <div id="slideshow">
+          <div class="slide-wrapper">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+          </div>
+        </div>
+        <!-- Login -->
+        <form id="login-details" class="login-details" method="get">
+          <img src="res/images/hp-logo.png" alt="" />
+          <div class="details">
+            <label for="email"
+              >EMAIL ADDRESS
+              <input
+                name="email"
+                type="email"
+                placeholder="Enter e-mail here"
+                required
+            /></label>
+            <label for="password"
+              >PASSWORD
+              <input
+                name="password"
+                type="password"
+                placeholder="Enter password"
+                required
+            /></label>
+          </div>
+          <button
+            type="submit"
+            onclick='window.location.href = "homepage.html"'
+          >
+            Log in
+          </button>
+          <a href="#" id="forgot">Forgot Password</a>
+          <a href="#" id="signup">Signup!</a>
+        </form>
+
+        <!-- Sign-up -->
+        <form id="signup-details" class="signup-details login-details">
+          <img src="res/images/hp-logo.png" alt="" />
+          <div class="details">
+            <label for="email"
+              >FULL NAME
+              <input
+                name="name"
+                type="text"
+                placeholder="ex. Juan P. Dela Cruz"
+                required
+            /></label>
+            <label for="email"
+              >EMAIL ADDRESS
+              <input
+                name="email"
+                type="email"
+                placeholder="Enter e-mail here"
+                required
+            /></label>
+            <label for="password"
+              >PASSWORD
+              <input
+                name="password"
+                type="password"
+                placeholder="Enter password"
+                required
+            /></label>
+            <label for="repeat-password"
+              >REPEAT PASSWORD
+              <input
+                name="password"
+                type="password"
+                placeholder="Repeat password"
+                required
+            /></label>
+          </div>
+          <button type="submit">Create Account</button>
+          <a href="#" class="login-btn">Already have an account? Login!</a>
+        </form>
+
+        <!-- Forgot details -->
+        <form id="forgot-details" class="forgot-details login-details">
+          <img src="res/images/hp-logo.png" alt="" />
+          <div class="details">
+            <label for="email"
+              >EMAIL ADDRESS
+              <input
+                name="email"
+                type="email"
+                placeholder="Enter e-mail here"
+                required
+            /></label>
+          </div>
+          <button type="submit">Change password</button>
+          <a href="#" class="login-btn">Login!</a>
+        </form>
+      </div>
+      <div class="map-container">
+        <div class="search-container">
+          <div class="search-box">
+            <img src="res/images/search.png" alt="" />
+            <input
+              type="text"
+              id="search"
+              onkeydown="if(event.key === 'Enter') searchGrave()"
+              class="search-bar"
+              placeholder="name, birthday, death date...."
+            />
+          </div>
+        </div>
+        <a href="#" id="reset" onclick="resetMap()"
+          ><img src="res/images/reset-icon.png" alt=""
+        /></a>
+        <div id="map"></div>
+      </div>
+    </div>
+
+    <svg id="grainEffectSvg">
+      <filter id="noiseFilter">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.9"
+          stitchTiles="stitch"
+        />
+        <feColorMatrix
+          in="colorNoise"
+          type="matrix"
+          values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0"
+        />
+        <feComposite operator="in" in2="SourceGraphic" result="monoNoise" />
+        <feBlend in="SourceGraphic" in2="monoNoise" mode="screen" />
+      </filter>
+    </svg>
+
+    <!-- Show login, signup & forgot -->
+
+    <script>
+      var login = document.getElementById("login-details");
+      var signup = document.getElementById("signup-details");
+      var forgot = document.getElementById("forgot-details");
+
+      // Show signup
+      document.getElementById("signup").addEventListener("click", function () {
+        signup.style.display = "flex";
+        login.style.display = "none";
+        forgot.style.display = "none";
+      });
+
+      // Show forgot details
+      document.getElementById("forgot").addEventListener("click", function () {
+        forgot.style.display = "flex";
+        signup.style.display = "none";
+        login.style.display = "none";
+      });
+
+      // Show login
+      document.querySelectorAll(".login-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          document.getElementById("login-details").style.display = "flex";
+          document.getElementById("signup-details").style.display = "none";
+          document.getElementById("forgot-details").style.display = "none";
+        });
+      });
+    </script>
+
+    <script src="map.js"></script>
+
+    <script>
+      function toggleMenu() {
+        let sidebar = document.getElementById("sidebar");
+        let mainContent = document.getElementById("main-content");
+
+        if (sidebar.classList.contains("open")) {
+          sidebar.classList.remove("open");
+          mainContent.classList.remove("dark");
+
+          // mainContent.classList.remove("shift");
+        } else {
+          sidebar.classList.add("open");
+          mainContent.classList.add("dark");
+
+          // mainContent.classList.add("shift");
+        }
+      }
+    </script>
+  </body>
+</html>

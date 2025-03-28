@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="res/images/hp-logo.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="frontpageStyle.css" />
+    <link rel="stylesheet" href="about.css" />
+    <title>About</title>
+  </head>
+  <body>
+    <nav>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <div class="brand-container">
+        <img src="res/images/hp-logo.png" width="49" />
+        <h2 class="brand-title">Palanyag Cemetery Digital Navigation System</h2>
+      </div>
+    </nav>
+    <div class="sidebar" id="sidebar">
+      <ul>
+        <li><a href="frontpage.html">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contacts</a></li>
+      </ul>
+    </div>
+    <div class="main-content" id="main-content">
+      <div class="bg">
+        <div class="bg-img"></div>
+      </div>
+      <div class="about-container">
+        <div class="paragraph">
+          <h1>What About Us?!!! ^_^</h1>
+          <p>
+            At Palanyag Cemetery, we are dedicated to honoring the past while
+            embracing the future. Through innovative technology, we provide a
+            seamless experience for families and loved ones, making cemetery
+            services more accessible, efficient, and stress-free. Our goal is to
+            modernize traditional burial processes by integrating digital
+            navigation, online burial reservations, and secure payment
+            solutions—ensuring that our services are not only convenient but
+            also respectful and dignified. We understand the emotional weight of
+            losing a loved one, which is why we strive to simplify cemetery
+            management, allowing families to focus on what truly
+            matters—cherishing memories and paying respects.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      function toggleMenu() {
+        let sidebar = document.getElementById("sidebar");
+        let mainContent = document.getElementById("main-content");
+
+        if (sidebar.classList.contains("open")) {
+          sidebar.classList.remove("open");
+          mainContent.classList.remove("dark");
+
+          // mainContent.classList.remove("shift");
+        } else {
+          sidebar.classList.add("open");
+          mainContent.classList.add("dark");
+
+          // mainContent.classList.add("shift");
+        }
+      }
+    </script>
+    <script src="includeHTML.js"></script>
+  </body>
+</html>

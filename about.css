@@ -1,0 +1,63 @@
+.bg {
+  background-image: linear-gradient(#599e828c, #599e828c);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-color: #599e82; */
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+.bg-img {
+  background-image: url("res/images/palanyagBg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: inherit;
+  width: inherit;
+}
+
+.main-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 91.2lvh;
+  /* margin-top: 4rem; */
+}
+
+.about-container {
+  background-color: white;
+  padding: 2rem;
+  height: 40rem;
+  width: 80%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+  text-align: justify;
+}
+
+.paragraph {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  margin: 0 4rem;
+  margin-top: -1rem;
+  /* margin-top: 4.5rem; */
+}
+
+.about-container h1 {
+  font-size: 6rem;
+  /* margin-top: 4rem; */
+  color: #3aa279;
+}
+
+.about-container p {
+  line-height: 2.5rem;
+  /* text-decoration: overline underline line-through; */
+}
