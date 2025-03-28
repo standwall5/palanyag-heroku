@@ -32,9 +32,9 @@
                 $message = "Registration successful!";
             } catch (PDOException $e) {
                 if ($e->getCode() == 23505) { // Unique constraint violation
-                    $message = "Email already registered.";
+                    $messageReg = "Email already registered.";
                 } else {
-                    $message = "Error: " . $e->getMessage();
+                    $messageReg = "Error: " . $e->getMessage();
                 }
             }
         } elseif ($action === "login") {
@@ -185,7 +185,7 @@
             /></label>
           </div>
           <button type="submit">Create Account</button>
-          <p><?php echo $message ?></p>
+          <p><?php echo $messageReg ?></p>
           <a href="#" class="login-btn">Already have an account? Login!</a>
         </form>
 
