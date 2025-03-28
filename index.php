@@ -114,7 +114,7 @@
           </div>
         </div>
         <!-- Login -->
-        <form id="login-details" class="login-details" method="post">
+        <form id="login-details" class="login-details" method="post" action="">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
           <input type="hidden" name="action" value="login">
@@ -145,7 +145,7 @@
         </form>
 
         <!-- Sign-up/Register -->
-        <form id="signup-details" class="signup-details login-details" method="POST">
+        <form id="signup-details" class="signup-details login-details" method="POST" action="">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
           <input type="hidden" name="action" value="register">
