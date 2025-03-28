@@ -114,7 +114,7 @@
           </div>
         </div>
         <!-- Login -->
-        <form id="login-details" class="login-details" method="post" action="javascript:void(0);">
+        <form id="login-details" class="login-details" method="post" action="">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
           <input type="hidden" name="action" value="login">
@@ -145,7 +145,7 @@
         </form>
 
         <!-- Sign-up/Register -->
-        <form id="signup-details" class="signup-details login-details" method="POST" action="javascript:void(0);">
+        <form id="signup-details" class="signup-details login-details" method="POST" action="">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
           <input type="hidden" name="action" value="register">
@@ -188,7 +188,7 @@
         </form>
 
         <!-- Forgot details -->
-        <form id="forgot-details" class="forgot-details login-details" action="javascript:void(0);">
+        <form id="forgot-details" class="forgot-details login-details">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
             <label for="email"
@@ -244,33 +244,41 @@
     <!-- Show login, signup & forgot -->
 
     <script>
-      var login = document.getElementById("login-details");
-      var signup = document.getElementById("signup-details");
-      var forgot = document.getElementById("forgot-details");
+  var login = document.getElementById("login-details");
+  var signup = document.getElementById("signup-details");
+  var forgot = document.getElementById("forgot-details");
 
-      // Show signup
-      document.getElementById("signup").addEventListener("click", function () {
-        signup.style.display = "flex";
-        login.style.display = "none";
-        forgot.style.display = "none";
-      });
+  // Function to show a specific section
+  function showSection(section) {
+    localStorage.setItem("activeSection", section); // Store in localStorage
+    login.style.display = section === "login" ? "flex" : "none";
+    signup.style.display = section === "signup" ? "flex" : "none";
+    forgot.style.display = section === "forgot" ? "flex" : "none";
+  }
 
-      // Show forgot details
-      document.getElementById("forgot").addEventListener("click", function () {
-        forgot.style.display = "flex";
-        signup.style.display = "none";
-        login.style.display = "none";
-      });
+  // Show signup
+  document.getElementById("signup").addEventListener("click", function () {
+    showSection("signup");
+  });
 
-      // Show login
-      document.querySelectorAll(".login-btn").forEach((btn) => {
-        btn.addEventListener("click", function () {
-          document.getElementById("login-details").style.display = "flex";
-          document.getElementById("signup-details").style.display = "none";
-          document.getElementById("forgot-details").style.display = "none";
-        });
-      });
-    </script>
+  // Show forgot details
+  document.getElementById("forgot").addEventListener("click", function () {
+    showSection("forgot");
+  });
+
+  // Show login
+  document.querySelectorAll(".login-btn").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      showSection("login");
+    });
+  });
+
+  // On page load, restore last active section
+  document.addEventListener("DOMContentLoaded", function () {
+    var activeSection = localStorage.getItem("activeSection") || "login";
+    showSection(activeSection);
+  });
+</script>
 
 
 
