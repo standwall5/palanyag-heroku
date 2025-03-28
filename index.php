@@ -29,7 +29,7 @@
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute(['email' => $email, 'password' => $hashedPassword, 'name' => $name]);
 
-                echo "Registration successful! <a href='login.php'>Login here</a>";
+                $message = "Registration successful!";
             } catch (PDOException $e) {
                 if ($e->getCode() == 23505) { // Unique constraint violation
                     echo "Email already registered.";
@@ -46,12 +46,14 @@
 
             if ($user && password_verify($password, $user['password'])) {
                 // Login successful, store session
+                $message = "Login successful!";
+
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['email']   = $user['email'];
                 header("Location: homepage.php");
                 exit();
             } else {
-                echo "Invalid email or password.";
+                $message = "Invalid email or password.";
             }
         }
     }
@@ -134,11 +136,10 @@
             /></label>
           </div>
           <button
-            type="submit"
-            onclick='window.location.href = "homepage.html"'
-          >
+            type="submit">
             Log in
           </button>
+          <p><?php echo $message ?></p>
           <a href="#" id="forgot">Forgot Password</a>
           <a href="#" id="signup">Signup!</a>
         </form>
@@ -182,6 +183,7 @@
             /></label>
           </div>
           <button type="submit">Create Account</button>
+          <p><?php echo $message ?></p>
           <a href="#" class="login-btn">Already have an account? Login!</a>
         </form>
 
