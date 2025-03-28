@@ -2,6 +2,8 @@
     session_start();
     require 'db.php';
 
+    $message    = "";
+    $messageReg = "";
     // Register
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $action = $_POST['action']; // Determine if it's register or login

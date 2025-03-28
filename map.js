@@ -130,4 +130,6 @@ function searchGrave() {
 
 function resetMap() {
   map.setView([14.48829245842671, 120.98897736022812], 19);
+  if (polyline) map.removeLayer(polyline);
+  map.closePopup();
 }
