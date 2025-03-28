@@ -114,7 +114,7 @@
           </div>
         </div>
         <!-- Login -->
-        <form id="login-details" class="login-details" method="post" action="index.php?section=login">
+        <form id="login-details" class="login-details" method="post" action="">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
           <input type="hidden" name="action" value="login">
@@ -145,7 +145,7 @@
         </form>
 
         <!-- Sign-up/Register -->
-        <form id="signup-details" class="signup-details login-details" method="POST" action="index.php?section=signup">
+        <form id="signup-details" class="signup-details login-details" method="POST" action="">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
           <input type="hidden" name="action" value="register">
@@ -188,7 +188,7 @@
         </form>
 
         <!-- Forgot details -->
-        <form id="forgot-details" class="forgot-details login-details" action="index.php?section=forgot">
+        <form id="forgot-details" class="forgot-details login-details">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
             <label for="email"
@@ -248,18 +248,38 @@
   var signup = document.getElementById("signup-details");
   var forgot = document.getElementById("forgot-details");
 
+  // Function to show a specific section
   function showSection(section) {
+    localStorage.setItem("activeSection", section); // Store in localStorage
     login.style.display = section === "login" ? "flex" : "none";
     signup.style.display = section === "signup" ? "flex" : "none";
     forgot.style.display = section === "forgot" ? "flex" : "none";
   }
 
-  // Get section from URL
-  var params = new URLSearchParams(window.location.search);
-  var activeSection = params.get("section") || "login";
+  // Show signup
+  document.getElementById("signup").addEventListener("click", function () {
+    showSection("signup");
+  });
 
-  showSection(activeSection);
+  // Show forgot details
+  document.getElementById("forgot").addEventListener("click", function () {
+    showSection("forgot");
+  });
+
+  // Show login
+  document.querySelectorAll(".login-btn").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      showSection("login");
+    });
+  });
+
+  // On page load, restore last active section
+  document.addEventListener("DOMContentLoaded", function () {
+    var activeSection = localStorage.getItem("activeSection") || "login";
+    showSection(activeSection);
+  });
 </script>
+
 
 
     <script src="map.js"></script>
