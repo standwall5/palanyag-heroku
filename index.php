@@ -244,33 +244,23 @@
     <!-- Show login, signup & forgot -->
 
     <script>
-      var login = document.getElementById("login-details");
-      var signup = document.getElementById("signup-details");
-      var forgot = document.getElementById("forgot-details");
+  var login = document.getElementById("login-details");
+  var signup = document.getElementById("signup-details");
+  var forgot = document.getElementById("forgot-details");
 
-      // Show signup
-      document.getElementById("signup").addEventListener("click", function () {
-        signup.style.display = "flex";
-        login.style.display = "none";
-        forgot.style.display = "none";
-      });
+  function showSection(section) {
+    login.style.display = section === "login" ? "flex" : "none";
+    signup.style.display = section === "signup" ? "flex" : "none";
+    forgot.style.display = section === "forgot" ? "flex" : "none";
+  }
 
-      // Show forgot details
-      document.getElementById("forgot").addEventListener("click", function () {
-        forgot.style.display = "flex";
-        signup.style.display = "none";
-        login.style.display = "none";
-      });
+  // Get section from URL
+  var params = new URLSearchParams(window.location.search);
+  var activeSection = params.get("section") || "login";
 
-      // Show login
-      document.querySelectorAll(".login-btn").forEach((btn) => {
-        btn.addEventListener("click", function () {
-          document.getElementById("login-details").style.display = "flex";
-          document.getElementById("signup-details").style.display = "none";
-          document.getElementById("forgot-details").style.display = "none";
-        });
-      });
-    </script>
+  showSection(activeSection);
+</script>
+
 
     <script src="map.js"></script>
 
