@@ -14,10 +14,11 @@
 
             // Validate input
             if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                die("Invalid email format.");
+                $messageReg = "Invalid email format.";
+
             }
             if (strlen($password) < 6) {
-                die("Password must be at least 6 characters long.");
+                $messageReg = "Password must be at least 6 characters long.";
             }
 
             // Hash password
