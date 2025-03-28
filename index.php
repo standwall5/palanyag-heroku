@@ -247,21 +247,50 @@
     <!-- Show login, signup & forgot -->
 
     <script>
-  var login = document.getElementById("login-details");
-  var signup = document.getElementById("signup-details");
-  var forgot = document.getElementById("forgot-details");
-
-  function showSection(section) {
-    login.style.display = section === "login" ? "flex" : "none";
-    signup.style.display = section === "signup" ? "flex" : "none";
-    forgot.style.display = section === "forgot" ? "flex" : "none";
-  }
-
-  // Get section from URL
+ // Function to get URL parameters
+function getQueryParam(param) {
   var params = new URLSearchParams(window.location.search);
-  var activeSection = params.get("section") || "login";
+  return params.get(param);
+}
 
+// Function to show a specific section
+function showSection(section) {
+  // Update the URL without reloading the page
+  var newUrl = window.location.pathname + "?section=" + section;
+  window.history.pushState({ path: newUrl }, "", newUrl);
+
+  // Show/hide sections
+  document.getElementById("login-details").style.display = section === "login" ? "flex" : "none";
+  document.getElementById("signup-details").style.display = section === "signup" ? "flex" : "none";
+  document.getElementById("forgot-details").style.display = section === "forgot" ? "flex" : "none";
+}
+
+// On page load, check for section in URL
+document.addEventListener("DOMContentLoaded", function () {
+  var activeSection = getQueryParam("section") || "login";
   showSection(activeSection);
+});
+
+// Show signup
+document.getElementById("signup").addEventListener("click", function (event) {
+  event.preventDefault();
+  showSection("signup");
+});
+
+// Show forgot details
+document.getElementById("forgot").addEventListener("click", function (event) {
+  event.preventDefault();
+  showSection("forgot");
+});
+
+// Show login
+document.querySelectorAll(".login-btn").forEach((btn) => {
+  btn.addEventListener("click", function (event) {
+    event.preventDefault();
+    showSection("login");
+  });
+});
+
 </script>
 
 
