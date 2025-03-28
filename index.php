@@ -32,9 +32,9 @@
                 $message = "Registration successful!";
             } catch (PDOException $e) {
                 if ($e->getCode() == 23505) { // Unique constraint violation
-                    echo "Email already registered.";
+                    $message = "Email already registered.";
                 } else {
-                    echo "Error: " . $e->getMessage();
+                    $message = "Error: " . $e->getMessage();
                 }
             }
         } elseif ($action === "login") {
