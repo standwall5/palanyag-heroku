@@ -118,6 +118,7 @@
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
           <input type="hidden" name="action" value="login">
+          <input type="hidden" name="section" value="login">
             <label for="email"
               >EMAIL ADDRESS
               <input
@@ -149,6 +150,7 @@
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
           <input type="hidden" name="action" value="register">
+          <input type="hidden" name="section" value="signup">
             <label for="email"
               >FULL NAME
               <input
@@ -191,6 +193,7 @@
         <form id="forgot-details" class="forgot-details login-details">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
+          <input type="hidden" name="section" value="forgot">
             <label for="email"
               >EMAIL ADDRESS
               <input
@@ -248,36 +251,17 @@
   var signup = document.getElementById("signup-details");
   var forgot = document.getElementById("forgot-details");
 
-  // Function to show a specific section
   function showSection(section) {
-    localStorage.setItem("activeSection", section); // Store in localStorage
     login.style.display = section === "login" ? "flex" : "none";
     signup.style.display = section === "signup" ? "flex" : "none";
     forgot.style.display = section === "forgot" ? "flex" : "none";
   }
 
-  // Show signup
-  document.getElementById("signup").addEventListener("click", function () {
-    showSection("signup");
-  });
+  // Get section from URL
+  var params = new URLSearchParams(window.location.search);
+  var activeSection = params.get("section") || "login";
 
-  // Show forgot details
-  document.getElementById("forgot").addEventListener("click", function () {
-    showSection("forgot");
-  });
-
-  // Show login
-  document.querySelectorAll(".login-btn").forEach((btn) => {
-    btn.addEventListener("click", function () {
-      showSection("login");
-    });
-  });
-
-  // On page load, restore last active section
-  document.addEventListener("DOMContentLoaded", function () {
-    var activeSection = localStorage.getItem("activeSection") || "login";
-    showSection(activeSection);
-  });
+  showSection(activeSection);
 </script>
 
 
