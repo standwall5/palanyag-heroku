@@ -114,7 +114,7 @@
           </div>
         </div>
         <!-- Login -->
-        <form id="login-details" class="login-details" method="post" action="">
+        <form id="login-details" class="login-details" method="post" action="index.php?section=login">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
           <input type="hidden" name="action" value="login">
@@ -145,7 +145,7 @@
         </form>
 
         <!-- Sign-up/Register -->
-        <form id="signup-details" class="signup-details login-details" method="POST" action="">
+        <form id="signup-details" class="signup-details login-details" method="POST" action="index.php?section=signup">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
           <input type="hidden" name="action" value="register">
@@ -188,7 +188,7 @@
         </form>
 
         <!-- Forgot details -->
-        <form id="forgot-details" class="forgot-details login-details">
+        <form id="forgot-details" class="forgot-details login-details" action="index.php?section=forgot">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
             <label for="email"
