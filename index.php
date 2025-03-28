@@ -1,3 +1,62 @@
+<?php
+    session_start();
+    require 'db.php';
+
+    // Register
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $action = $_POST['action']; // Determine if it's register or login
+
+        $email    = $_POST['email'];
+        $password = $_POST['password'];
+
+        if ($action === "register") {
+            $name = $_POST['name'];
+
+            // Validate input
+            if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                die("Invalid email format.");
+            }
+            if (strlen($password) < 6) {
+                die("Password must be at least 6 characters long.");
+            }
+
+            // Hash password
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            try {
+                // Insert user into DB
+                $sql  = "INSERT INTO users (email, password, name) VALUES (:email, :password, :name)";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute(['email' => $email, 'password' => $hashedPassword, 'name' => $name]);
+
+                echo "Registration successful! <a href='login.php'>Login here</a>";
+            } catch (PDOException $e) {
+                if ($e->getCode() == 23505) { // Unique constraint violation
+                    echo "Email already registered.";
+                } else {
+                    echo "Error: " . $e->getMessage();
+                }
+            }
+        } elseif ($action === "login") {
+            // Fetch user from DB
+            $sql  = "SELECT * FROM users WHERE email = :email";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['email' => $email]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($user && password_verify($password, $user['password'])) {
+                // Login successful, store session
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['email']   = $user['email'];
+                header("Location: homepage.php");
+                exit();
+            } else {
+                echo "Invalid email or password.";
+            }
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -53,9 +112,10 @@
           </div>
         </div>
         <!-- Login -->
-        <form id="login-details" class="login-details" method="get">
+        <form id="login-details" class="login-details" method="post">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
+          <input type="hidden" name="action" value="login">
             <label for="email"
               >EMAIL ADDRESS
               <input
@@ -83,10 +143,11 @@
           <a href="#" id="signup">Signup!</a>
         </form>
 
-        <!-- Sign-up -->
-        <form id="signup-details" class="signup-details login-details">
+        <!-- Sign-up/Register -->
+        <form id="signup-details" class="signup-details login-details" method="POST">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
+          <input type="hidden" name="action" value="register">
             <label for="email"
               >FULL NAME
               <input
@@ -114,7 +175,7 @@
             <label for="repeat-password"
               >REPEAT PASSWORD
               <input
-                name="password"
+                name="repeat-password"
                 type="password"
                 placeholder="Repeat password"
                 required
