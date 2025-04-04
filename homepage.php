@@ -1,3 +1,16 @@
+<?php
+    session_start();
+    $fullName  = $_SESSION['name'];
+    $nameParts = explode(" ", $fullName);
+
+    // Get the first two words (if available)
+    if (count($nameParts) === 3) {
+        $shortName = $nameParts[0] . " " . $nameParts[1]; // Get only the first two words
+    } else {
+        $shortName = $fullName; // Keep the original name if it's not exactly 3 words
+    }
+?>
+
 <!DOCTYPE html>
 <!-- Coding By CodingNepal - youtube.com/@codingnepal -->
 <html lang="en">
@@ -75,18 +88,17 @@
 
           <!-- Secondary Bottom Nav -->
           <ul class="nav-list secondary-nav">
-            <li class="nav-item">
+            <li class="nav-item" onclick="window.location.href='logout.php'">
               <a
-                href="#"
+                href="logout.php"
                 class="nav-link"
-                onclick='window.location.href = "index.html";'
               >
                 <span class="material-symbols-rounded">logout</span>
                 <span class="nav-label">Sign Out</span>
               </a>
               <ul class="dropdown-menu">
-                <li class="nav-item">
-                  <a href="#" class="nav-link dropdown-title">Sign Out</a>
+                <li class="nav-item" onclick="window.location.href='logout.php'">
+                  <a href="logout.php" class="nav-link dropdown-title">Sign Out</a>
                 </li>
               </ul>
             </li>
@@ -96,7 +108,7 @@
 
       <div class="content">
         <div id="main-content">
-          <h2>Welcome to Himlayang Palanyag</h2>
+          <h2>Welcome to Himlayang Palanyag,                                                                                                                                                                                 <?php echo $shortName ?></h2>
           <p>Dynamic content will appear here.</p>
         </div>
       </div>

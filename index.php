@@ -4,6 +4,8 @@
 
     $message    = "";
     $messageReg = "";
+    $swalLogin  = "";
+    $swalReg    = "";
     // Register
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $action = $_POST['action']; // Determine if it's register or login
@@ -19,8 +21,8 @@
                 $messageReg = "Invalid email format.";
                 exit;
             }
-            if (strlen($password) < 6) {
-                $messageReg = "Password must be at least 6 characters long.";
+            if (strlen($password) < 2) {
+                $messageReg = "Password must be at least 2 characters long.";
                 exit;
             }
 
@@ -34,11 +36,17 @@
                 $stmt->execute(['email' => $email, 'password' => $hashedPassword, 'name' => $name]);
 
                 $message = "Registration successful!";
+                $swalReg = "<script>Swal.fire({ title: 'Success!', text: 'Registration successful!', icon: 'success', showConfirmButton: false,
+    timer: 1825});</script>";
             } catch (PDOException $e) {
                 if ($e->getCode() == 23505) { // Unique constraint violation
                     $messageReg = "Email already registered.";
+                    $swalReg    = "<script>Swal.fire({ title: 'Error!', text: 'Account already exists.', icon: 'error', showConfirmButton: false,
+    timer: 1825});</script>";
                 } else {
                     $messageReg = "Error: " . $e->getMessage();
+                    $swalReg    = "<script>Swal.fire('Error!', '" . addslashes($messageReg) . "', 'error', showConfirmButton: false,
+    timer: 1825);</script>";
                 }
             }
         } elseif ($action === "login") {
@@ -50,14 +58,20 @@
 
             if ($user && password_verify($password, $user['password'])) {
                 // Login successful, store session
-                $message = "Login successful!";
+                $message   = "Login successful!";
+                $swalLogin = "<script>Swal.fire({ title: 'Success!', text: 'Login successful! Redirecting...', icon: 'success', showConfirmButton: false,
+    timer: 1825}).then(function() {
+        window.location = 'homepage.php';
+    });;</script>";
 
-                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_id'] = $user['userid'];
                 $_SESSION['email']   = $user['email'];
-                header("Location: homepage.php");
-                exit();
+                $_SESSION['name']    = $user['name'];
             } else {
-                $message = "Invalid email or password.";
+                $message   = "Invalid email or password.";
+                $swalLogin = "<script>Swal.fire({ title: 'Login failed', text: 'Invalid email or password.', icon: 'error', showConfirmButton: false,
+    timer: 1825});</script>";
+
             }
         }
     }
@@ -86,6 +100,8 @@
     ></script>
     <link rel="stylesheet" href="frontpageStyle.css" />
     <title>Navigation System</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   </head>
   <body>
     <nav>
@@ -144,7 +160,7 @@
             type="submit">
             Log in
           </button>
-          <p><?php echo $message ?></p>
+          <p class="indexMessage"><?php echo $message ?></p><?php echo $swalLogin ?>
           <a href="#" id="forgot">Forgot Password</a>
           <a href="#" id="signup">Signup!</a>
         </form>
@@ -189,12 +205,12 @@
             /></label>
           </div>
           <button type="submit">Create Account</button>
-          <p><?php echo $messageReg ?></p>
+          <p class="indexMessage"><?php echo $messageReg ?></p><?php echo $swalReg ?>
           <a href="#" class="login-btn">Already have an account? Login!</a>
         </form>
 
         <!-- Forgot details -->
-        <form id="forgot-details" class="forgot-details login-details">
+        <form id="forgot-details" class="forgot-details login-details" action="">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
           <input type="hidden" name="section" value="forgot">
