@@ -10,8 +10,9 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $action = $_POST['action']; // Determine if it's register or login
 
-        $email    = $_POST['email'];
-        $password = $_POST['password'];
+        $email          = $_POST['email'];
+        $password       = $_POST['password'];
+        $repeatPassword = $_POST['repeat-password'];
 
         if ($action === "register") {
             $name = $_POST['name'];
@@ -24,6 +25,10 @@
             if (strlen($password) < 2) {
                 $messageReg = "Password must be at least 2 characters long.";
                 exit;
+            }
+            if ($password != $repeatPassword) {
+                $swalReg = "<script>Swal.fire({ title: 'Error', text: 'Passwords do not match', icon: 'error', showConfirmButton: false,
+    timer: 1825});</script>";
             }
 
             // Hash password
