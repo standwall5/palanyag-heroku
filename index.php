@@ -20,41 +20,36 @@
             // Validate input
             if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $messageReg = "Invalid email format.";
-                exit;
-            }
-            if (strlen($password) < 2) {
+            } elseif (strlen($password) < 2) {
                 $messageReg = "Password must be at least 2 characters long.";
-                exit;
-            }
-            if ($password != $repeatPassword) {
+            } elseif ($password != $repeatPassword) {
                 $swalReg = "<script>Swal.fire({ title: 'Error', text: 'Passwords do not match', icon: 'error', showConfirmButton: false,
     timer: 1825});</script>";
-                exit;
-            }
+            } else {
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            // Hash password
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                try {
+                    // Insert user into DB
+                    $sql  = "INSERT INTO users (email, password, name) VALUES (:email, :password, :name)";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute(['email' => $email, 'password' => $hashedPassword, 'name' => $name]);
 
-            try {
-                // Insert user into DB
-                $sql  = "INSERT INTO users (email, password, name) VALUES (:email, :password, :name)";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute(['email' => $email, 'password' => $hashedPassword, 'name' => $name]);
-
-                $message = "Registration successful!";
-                $swalReg = "<script>Swal.fire({ title: 'Success!', text: 'Registration successful!', icon: 'success', showConfirmButton: false,
+                    $message = "Registration successful!";
+                    $swalReg = "<script>Swal.fire({ title: 'Success!', text: 'Registration successful!', icon: 'success', showConfirmButton: false,
     timer: 1825});</script>";
-            } catch (PDOException $e) {
-                if ($e->getCode() == 23505) { // Unique constraint violation
-                    $messageReg = "Email already registered.";
-                    $swalReg    = "<script>Swal.fire({ title: 'Error!', text: 'Account already exists.', icon: 'error', showConfirmButton: false,
+                } catch (PDOException $e) {
+                    if ($e->getCode() == 23505) { // Unique constraint violation
+                        $messageReg = "Email already registered.";
+                        $swalReg    = "<script>Swal.fire({ title: 'Error!', text: 'Account already exists.', icon: 'error', showConfirmButton: false,
     timer: 1825});</script>";
-                } else {
-                    $messageReg = "Error: " . $e->getMessage();
-                    $swalReg    = "<script>Swal.fire('Error!', '" . addslashes($messageReg) . "', 'error', showConfirmButton: false,
+                    } else {
+                        $messageReg = "Error: " . $e->getMessage();
+                        $swalReg    = "<script>Swal.fire('Error!', '" . addslashes($messageReg) . "', 'error', showConfirmButton: false,
     timer: 1825);</script>";
+                    }
                 }
             }
+
         } elseif ($action === "login") {
             // Fetch user from DB
             $sql  = "SELECT * FROM users WHERE email = :email";
