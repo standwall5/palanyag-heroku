@@ -29,6 +29,7 @@
             if ($password != $repeatPassword) {
                 $swalReg = "<script>Swal.fire({ title: 'Error', text: 'Passwords do not match', icon: 'error', showConfirmButton: false,
     timer: 1825});</script>";
+                exit;
             }
 
             // Hash password
