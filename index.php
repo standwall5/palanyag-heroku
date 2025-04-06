@@ -10,11 +10,12 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $action = $_POST['action']; // Determine if it's register or login
 
-        $email          = $_POST['email'];
-        $password       = $_POST['password'];
-        $repeatPassword = $_POST['repeat-password'];
+        $email    = $_POST['email'];
+        $password = $_POST['password'];
 
         if ($action === "register") {
+            $repeatPassword = $_POST['repeat-password'];
+
             $name = $_POST['name'];
 
             // Validate input
@@ -104,9 +105,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   </head>
-  <body>
+  <body id="htmlBody">
     <nav>
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <div class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</div>
       <div class="brand-container">
         <img src="res/images/hp-logo.png" width="49" />
         <h2 class="brand-title">Palanyag Cemetery Digital Navigation System</h2>
@@ -319,8 +320,11 @@ document.querySelectorAll(".login-btn").forEach((btn) => {
     <script src="map.js"></script>
 
     <script>
+      let sidebar = document.getElementById("sidebar");
+
+      let body = document.getElementById("htmlBody");
+
       function toggleMenu() {
-        let sidebar = document.getElementById("sidebar");
         let mainContent = document.getElementById("main-content");
 
         if (sidebar.classList.contains("open")) {
@@ -335,6 +339,16 @@ document.querySelectorAll(".login-btn").forEach((btn) => {
           // mainContent.classList.add("shift");
         }
       }
+      body.addEventListener('click', function (e) {
+  if (
+    sidebar.classList.contains("open") &&
+    !e.target.closest("#sidebar") &&
+    !e.target.closest("#menu-icon") // assuming your toggle button has this ID
+  ) {
+    toggleMenu();
+  }
+});
+
     </script>
   </body>
 </html>
