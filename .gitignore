@@ -1,0 +1,21 @@
+# Ignore Composer's vendor directory (Heroku installs dependencies automatically)
+vendor/
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore logs and temp files
+*.log
+*.cache
+*.tmp
+tmp/
+cache/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore node stuff if you're mixing frontend
+node_modules/
+dist/
