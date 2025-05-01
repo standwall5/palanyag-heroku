@@ -15,8 +15,13 @@ var CartoDB_Voyager = L.tileLayer(
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: "abcd",
     maxZoom: 20,
+    rotate: true,
   }
 ).addTo(map);
+
+setTimeout(() => {
+  map.setBearing(45);
+}, 1000);
 
 // prototype purposes only
 var cemeteryData = [

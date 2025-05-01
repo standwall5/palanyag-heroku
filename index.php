@@ -110,7 +110,7 @@
       <div class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</div>
       <div class="brand-container">
         <img src="res/images/hp-logo.png" width="49" />
-        <h2 class="brand-title">Palanyag Cemetery Digital Navigation System</h2>
+        <h2 class="brand-title">Himlayang Palanyag Cemetery <span>Digital Navigation System</span></h2>
       </div>
     </nav>
 
@@ -315,9 +315,11 @@ document.querySelectorAll(".login-btn").forEach((btn) => {
 
 </script>
 
+<script src="https://unpkg.com/leaflet-rotate@0.1.1/dist/leaflet-rotate.min.js"></script>
 
 
     <script src="map.js"></script>
+
 
     <script>
       let sidebar = document.getElementById("sidebar");
