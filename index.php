@@ -1,4 +1,5 @@
 <?php
+// Contains login and registration php code
     session_start();
     require 'db.php';
 
