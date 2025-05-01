@@ -101,7 +101,7 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <link rel="stylesheet" href="/frontpageStyle.css" />
+    <link rel="stylesheet" href="frontpageStyle.css?v=1.2" />
     <title>Navigation System</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
