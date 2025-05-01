@@ -45,10 +45,6 @@ nav {
 
 }
 
-nav:hover {
-  border-bottom: solid 3px #29754f;
-}
-
 /* Menu Icon */
 .menu-icon {
   font-size: 24px;
