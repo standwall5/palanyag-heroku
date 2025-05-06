@@ -1,7 +1,7 @@
 <?php
 require 'db.php';
 
-$email = $_POST["email"];
+$email = trim($_POST["email"]);
 
 $token = bin2hex(random_bytes(16));
 

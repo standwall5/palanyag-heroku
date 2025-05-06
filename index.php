@@ -213,7 +213,7 @@
         </form>
 
         <!-- Forgot details -->
-        <form id="forgot-details" class="forgot-details login-details" action="forgotPassword.php">
+        <form id="forgot-details" class="forgot-details login-details" method="POST" action="forgotPassword.php">
           <img src="res/images/hp-logo.png" alt="" />
           <div class="details">
           <input type="hidden" name="section" value="forgot">
