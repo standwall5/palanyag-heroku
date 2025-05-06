@@ -16,12 +16,14 @@ try {
     
     if ($stmt->rowCount() === 0) {
         // No rows updated, possibly invalid email
-        // echo "No user found with that email.";
-        exit;
+        echo "No user found with that email.";
+        // exit;
     } else {
         // email $token to the user here
+        echo 'successfully changed token';
     }
 } catch (PDOException $e) {
-    console.log("Error ". $e->getMessage());
+    error_log("Database Error: " . $e->getMessage()); // Logs to the PHP error log
+    echo "An error occurred. Please try again later."; // Optional user-facing message
 }
 ?>
