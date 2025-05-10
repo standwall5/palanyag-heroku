@@ -7,6 +7,7 @@ $message    = "";
 $messageReg = "";
 $swalLogin  = "";
 $swalReg    = "";
+$resetConfirm = "";
 // Register
 if (isset($_GET['request']) && $_GET['request'] === 'sent') {
   $resetConfirm = "Please check your email.";
