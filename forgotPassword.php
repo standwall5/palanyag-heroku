@@ -21,7 +21,6 @@ try {
         // exit;
     } else {
         // email $token to the user here
-        echo 'successfully changed token';
 
         $mail = require 'mailer.php';
 
