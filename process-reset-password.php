@@ -35,15 +35,15 @@ if ($password != $repeatPassword) {
 
 try {
     // Insert password into DB
-    $sql  = "UPDATE users 
+    $sql2  = "UPDATE users 
 SET password = :password, 
     reset_token_hash = NULL, 
     reset_token_expires_at = NULL 
 WHERE userid = :userid";
-    $stmt = $pdo->prepare($sql);
+    $stmt = $pdo->prepare($sql2);
     $stmt->execute(['password' => $hashedPassword, 'userid' => $user['userid']]);
 
-    header("Location: https://palanyag-cemetery-69ca3dc881bc.herokuapp.com/resetPassword.php?status=success");
+    header("Location: https://palanyag-cemetery-69ca3dc881bc.herokuapp.com/reset-password.php?status=success");
     exit;
 } catch (PDOException $e) {
     if ($e->getCode() == 23505) { // Unique constraint violation
