@@ -103,10 +103,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body id="htmlBody">
     <nav>
         <div class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</div>
-        <div class="brand-container">
+        <a href="index.php" class="brand-container">
             <img src="res/images/hp-logo.png" width="49" />
             <h2 class="brand-title">Himlayang Palanyag Cemetery <span>Digital Navigation System</span></h2>
-        </div>
+        </a>
     </nav>
 
     <!-- Sidebar -->

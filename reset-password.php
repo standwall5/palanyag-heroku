@@ -103,10 +103,10 @@ $token = $_GET['token'];
 <body>
     <div class="background-image grayscale"></div>
     <nav>
-        <div class="brand-container">
+        <a href="index.php" class="brand-container">
             <img src="res/images/hp-logo.png" width="49" />
             <h2 class="brand-title">Himlayang Palanyag Cemetery <span>Digital Navigation System</span></h2>
-        </div>
+        </a>
     </nav>
     <div class="main-content">
         <div class="reset-container">
