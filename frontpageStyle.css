@@ -51,6 +51,13 @@ nav {
   cursor: pointer;
   padding: 10px;
   color: white;
+  transition: .25s;
+  border-radius: 1rem;
+}
+
+.menu-icon:hover {
+  color: var(--green);
+  background-color: white;
 }
 
 /* Sidebar Menu */
