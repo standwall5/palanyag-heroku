@@ -29,17 +29,14 @@ if ($password != $repeatPassword) {
     header("Location: resetPassword.php?status=fail");
     $swalReg = "<script>Swal.fire({ title: 'Error', text: 'Passwords do not match', icon: 'error', showConfirmButton: false,
     timer: 1825});</script>";
+    exit;
 } else {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 }
 
 try {
     // Insert password into DB
-    $sql2  = "UPDATE users 
-SET password = :password, 
-    reset_token_hash = NULL, 
-    reset_token_expires_at = NULL 
-WHERE userid = :userid";
+    $sql2  = "UPDATE users SET password = :password, reset_token_hash = NULL, reset_token_expires_at = NULL WHERE userid = :userid";
     $stmt = $pdo->prepare($sql2);
     $stmt->execute(['password' => $hashedPassword, 'userid' => $user['userid']]);
 

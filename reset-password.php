@@ -111,8 +111,9 @@ $token = $_GET['token'];
     <div class="main-content">
         <div class="reset-container">
             <form method="POST" action="process-reset-password.php">
-                <label for="password">Password<input type="password" placeholder="Enter password here"></label>
-                <label for="repeat-password">Repeat password<input type="password"
+                <label for="password">Password<input type="password" name="password"
+                        placeholder="Enter password here"></label>
+                <label for="repeat-password">Repeat password<input type="password" name="repeat-password"
                         placeholder="Repeat password"></label>
                 <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
                 <button type="submit">Change password</button><?php echo $swalPass ?>
