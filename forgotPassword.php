@@ -7,6 +7,7 @@ $token = bin2hex(random_bytes(16));
 
 $token_hash = hash("sha256", $token);
 
+date_default_timezone_set('Asia/Manila');
 $expiry = date("Y-m-d H:i:s", time() + 60 * 30); // times() seconds in 30 minutes
 
 try {
@@ -21,6 +22,17 @@ try {
     } else {
         // email $token to the user here
         echo 'successfully changed token';
+
+        $mail = require 'mailer.php';
+
+        $mail->setFrom("noreply@himalayangpalanyag.com");
+        $mail->addAddress($email);
+        $mail->Subject = "Password Reset";
+        $mail->Body = <<<END
+
+        Click <a href="https://palanyag-cemetery-eb397808a7a6.herokuapp.com/reset-password.php?token=$token">here</a> to reset your password
+
+        END;
     }
 } catch (PDOException $e) {
     error_log("Database Error: " . $e->getMessage()); // Logs to the PHP error log
