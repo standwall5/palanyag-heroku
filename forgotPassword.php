@@ -13,8 +13,8 @@ $expiry = date("Y-m-d H:i:s", time() + 60 * 30); // times() seconds in 30 minute
 try {
     $sql = "UPDATE users SET reset_token_hash = :token, reset_token_expires_at = :expiry WHERE email = :email";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['token' => $token_hash, 'expiry' => $expiry, 'email' => $email]);    
-    
+    $stmt->execute(['token' => $token_hash, 'expiry' => $expiry, 'email' => $email]);
+
     if ($stmt->rowCount() === 0) {
         // No rows updated, possibly invalid email
         echo "No user found with that email.";
@@ -35,11 +35,10 @@ try {
     }
     try {
         $mail->send();
-    } catch (Exception $e){
+    } catch (Exception $e) {
         echo "Message could not be sent. Mailer error: {$mail->ErrorInfo}";
     }
 } catch (PDOException $e) {
     error_log("Database Error: " . $e->getMessage()); // Logs to the PHP error log
     echo "An error occurred. Please try again later."; // Optional user-facing message
 }
-?>

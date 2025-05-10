@@ -102,7 +102,7 @@
       crossorigin=""
     ></script>
     <link rel="stylesheet" href="frontpageStyle.css?v=1.2" />
-    <title>Navigation System</title>
+    <title>Himlayang Palanyag</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   </head>
