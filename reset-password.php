@@ -16,6 +16,7 @@ $token = $_GET['token'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="res/images/hp-logo.png" type="image/x-icon" />
     <link rel="stylesheet" href="frontpageStyle.css?v=1.2" />
     <title>Reset Password | Himlayang Palanyag</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
