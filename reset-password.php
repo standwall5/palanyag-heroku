@@ -7,6 +7,7 @@ if (isset($_GET['status']) && $_GET['status'] === 'success') {
     $swalPass = "<script>Swal.fire({ title: 'Error', text: 'Passwords do not match', icon: 'error', showConfirmButton: false,
     timer: 1825});</script>";
 }
+$token = $_GET['token'];
 ?>
 
 <!DOCTYPE html>
@@ -113,6 +114,7 @@ if (isset($_GET['status']) && $_GET['status'] === 'success') {
                 <label for="password">Password<input type="password" placeholder="Enter password here"></label>
                 <label for="repeat-password">Repeat password<input type="password"
                         placeholder="Repeat password"></label>
+                <input type="hidden" name="token" value="<?php echo $token ?>">
                 <button type="submit">Change password</button><?php echo $swalPass ?>
             </form>
         </div>
