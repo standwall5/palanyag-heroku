@@ -35,6 +35,7 @@ try {
     }
     try {
         $mail->send();
+        header("Location: https://palanyag-cemetery-69ca3dc881bc.herokuapp.com/?section=forgot&request=sent");
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer error: {$mail->ErrorInfo}";
     }
