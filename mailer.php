@@ -16,10 +16,10 @@ $mail = new PHPMailer(true);
 $mail->isSMTP();
 $mail->SMTPAuth = true;
 
-$mail->Host = "smtp.google.com";
+$mail->Host = "smtp.mailgun.org";
 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 $mail->Port = 587;
-$mail->Username = "johnpatricksalen.devmail@gmail.com";
+$mail->Username = "palanyag-cemetery@sandboxd878aaa14ea44073a8ec09af49b099cd.mailgun.org";
 $mail->Password = getEnv('APP_PASSWORD');
 
 $mail->isHtml(true);
