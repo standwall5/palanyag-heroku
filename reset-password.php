@@ -114,7 +114,7 @@ $token = $_GET['token'];
                 <label for="password">Password<input type="password" placeholder="Enter password here"></label>
                 <label for="repeat-password">Repeat password<input type="password"
                         placeholder="Repeat password"></label>
-                <input type="hidden" name="token" value="<?php echo $token ?>">
+                <input type="hidden" name="token" value="<?php htmlspecialchars($token) ?>">
                 <button type="submit">Change password</button><?php echo $swalPass ?>
             </form>
         </div>
