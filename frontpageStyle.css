@@ -54,6 +54,9 @@ nav {
   transition: .25s;
   border-radius: 1rem;
   text-align: center;
+  display: flex;
+      justify-content: center;  /* Horizontal centering */
+      align-items: center; 
 }
 
 .menu-icon:hover {
