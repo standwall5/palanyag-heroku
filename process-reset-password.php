@@ -35,7 +35,11 @@ if ($password != $repeatPassword) {
 
 try {
     // Insert password into DB
-    $sql  = "UPDATE users (password , reset_token_hash, reset_token_expires_at) VALUES (:password, null, null) WHERE userid = :userid";
+    $sql  = "UPDATE users 
+SET password = :password, 
+    reset_token_hash = NULL, 
+    reset_token_expires_at = NULL 
+WHERE userid = :userid";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['password' => $hashedPassword, 'userid' => $user['userid']]);
 
