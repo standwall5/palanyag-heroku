@@ -53,6 +53,7 @@ nav {
   color: white;
   transition: .25s;
   border-radius: 1rem;
+  text-align: center;
 }
 
 .menu-icon:hover {
