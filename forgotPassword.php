@@ -29,7 +29,7 @@ try {
         $mail->Subject = "Password Reset";
         $mail->Body = <<<END
 
-        Click <a href="https://palanyag-cemetery-eb397808a7a6.herokuapp.com/reset-password.php?token=$token">here</a> to reset your password
+        Click <a href="https://palanyag-cemetery-69ca3dc881bc.herokuapp.com/reset-password.php?token=$token">here</a> to reset your password
 
         END;
     }
