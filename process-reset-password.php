@@ -39,7 +39,7 @@ try {
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['password' => $hashedPassword, 'userid' => $user['userid']]);
 
-    header("Location: resetPassword.php?status=success");
+    header("Location: https://palanyag-cemetery-69ca3dc881bc.herokuapp.com/resetPassword.php?status=success");
     exit;
 } catch (PDOException $e) {
     if ($e->getCode() == 23505) { // Unique constraint violation
