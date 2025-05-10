@@ -33,6 +33,11 @@ try {
 
         END;
     }
+    try {
+        $mail->send();
+    } catch (Exception $e){
+        echo "Message could not be sent. Mailer error: {$mail->ErrorInfo}";
+    }
 } catch (PDOException $e) {
     error_log("Database Error: " . $e->getMessage()); // Logs to the PHP error log
     echo "An error occurred. Please try again later."; // Optional user-facing message
