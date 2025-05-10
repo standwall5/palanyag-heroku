@@ -55,6 +55,7 @@ nav {
   border-radius: 1rem;
   text-align: center;
   border-radius: 0.7rem;
+  line-height: 10px;
 }
 
 .menu-icon:hover {
