@@ -10,6 +10,7 @@ if (count($nameParts) === 3) {
   $shortName = $fullName; // Keep the original name if it's not exactly 3 words
 }
 
+require 'db.php';
 try {
   $sql = "SELECT * FROM deceased;";
   $stmt = $pdo->query($sql);
