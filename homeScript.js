@@ -1,3 +1,23 @@
+let jsonDeceasedData = [];
+
+async function fetchDeceasedData() {
+  try {
+    const response = await fetch('backend/getDeceased.php');
+    if (!response.ok) throw new Error('Network response was not ok');
+
+    jsonDeceasedData = await response.json();
+    console.log('jsonDeceasedData:', jsonDeceasedData);
+
+    // You can call another function here to use the data
+    // displayDeceasedData(jsonDeceasedData);
+  } catch (error) {
+    console.error('Fetch error:', error);
+  }
+}
+
+fetchDeceasedData();
+
+
 // Toggle the visibility of a dropdown menu
 const toggleDropdown = (dropdown, menu, isOpen) => {
   dropdown.classList.toggle("open", isOpen);
