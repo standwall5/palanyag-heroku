@@ -2,7 +2,7 @@ let jsonDeceasedData = [];
 
 async function fetchDeceasedData() {
   try {
-    const response = await fetch('backend/getDeceased.php');
+    const response = await fetch('getDeceasedData.php');
     if (!response.ok) throw new Error('Network response was not ok');
 
     jsonDeceasedData = await response.json();
