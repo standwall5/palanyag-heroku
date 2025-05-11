@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Function to generate the Add New form
 const generateHome = () => {
   return `
-    <h2>Welcome to Himlayang Palanyag</h2>
+    <h2>Welcome to Himlayang Palanyag ${username}</h2>
     <div class="search-container">
             <div class="search-box">
         <i class="fas fa-search search-icon"></i>
@@ -54,109 +54,160 @@ const generateHome = () => {
 };
 
   // Function to generate the deceased table
-  const generateDeceasedTable = () => {
-    return `
+//   const generateDeceasedTable = () => {
+//     return `
   
-      <h2>Deceased Records</h2>
-     <div class="search-container">
-            <div class="search-box">
-        <i class="fas fa-search search-icon"></i>
-        <input type="text" id="search-bar" placeholder="Search here" class="search-bar">
-      </div>
-</div>
-<!-- Stats Section -->
-            <div class="stats">
-                <div class="stat-box">
-                    <h2>0</h2>
-                    <p>Total</p>
-                </div>
-                <div class="stat-box">
-                    <h2>0</h2>
-                    <p>Buried</p>
-                </div>
-                <div class="stat-box">
-                    <h2>0</h2>
-                    <p>Pending</p>
-                </div>
-            </div>
+//       <h2>Deceased Records</h2>
+//      <div class="search-container">
+//             <div class="search-box">
+//         <i class="fas fa-search search-icon"></i>
+//         <input type="text" id="search-bar" placeholder="Search here" class="search-bar">
+//       </div>
+// </div>
+// <!-- Stats Section -->
+//             <div class="stats">
+//                 <div class="stat-box">
+//                     <h2>0</h2>
+//                     <p>Total</p>
+//                 </div>
+//                 <div class="stat-box">
+//                     <h2>0</h2>
+//                     <p>Buried</p>
+//                 </div>
+//                 <div class="stat-box">
+//                     <h2>0</h2>
+//                     <p>Pending</p>
+//                 </div>
+//             </div>
 
-      <table class="deceased-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Lot</th>
-            <th>Street</th>
-            <th>Birth Date</th>
-            <th>Death Date</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="deceased-table-body">
-          <tr>
-            <td>Juan Dela Cruz</td>
-            <td>12</td>
-            <td>Main Street</td>
-            <td>January 1, 1950</td>
-            <td>March 5, 2020</td>
-            <td>Buried</td>
-            <td>
-              <button class="edit-btn">Edit</button>
-              <button class="delete-btn">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>One</td>
-            <td>1</td>
-            <td>Elm Street</td>
-            <td>January 1, 1951</td>
-            <td>March 1, 2021</td>
-            <td>Pending</td>
-            <td>
-              <button class="edit-btn">Edit</button>
-              <button class="delete-btn">Delete</button>
-            </td>
-          </tr>
-           <tr>
-            <td>Two</td>
-            <td>12</td>
-            <td>Palm Street</td>
-            <td>January 2, 1952</td>
-            <td>March 2, 2022</td>
-            <td>Buried</td>
-            <td>
-              <button class="edit-btn">Edit</button>
-              <button class="delete-btn">Delete</button>
-            </td>
-          </tr>
-           <tr>
-            <td>Three</td>
-            <td>12</td>
-            <td>Maple Street</td>
-            <td>January 3, 1953</td>
-            <td>March 3, 2023</td>
-            <td>Pending</td>
-            <td>
-              <button class="edit-btn">Edit</button>
-              <button class="delete-btn">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Four</td>
-            <td>12</td>
-            <td>Main Street</td>
-            <td>January 4, 1954</td>
-            <td>March 4, 2024</td>
-            <td>Buried</td>
-            <td>
-              <button class="edit-btn">Edit</button>
-              <button class="delete-btn">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    `;
-  };
+//       <table class="deceased-table">
+//         <thead>
+//           <tr>
+//             <th>Name</th>
+//             <th>Lot</th>
+//             <th>Street</th>
+//             <th>Birth Date</th>
+//             <th>Death Date</th>
+//             <th>Status</th>
+//             <th>Action</th>
+//           </tr>
+//         </thead>
+//         <tbody id="deceased-table-body">
+//           <tr>
+//             <td>Juan Dela Cruz</td>
+//             <td>12</td>
+//             <td>Main Street</td>
+//             <td>January 1, 1950</td>
+//             <td>March 5, 2020</td>
+//             <td>Buried</td>
+//             <td>
+//               <button class="edit-btn">Edit</button>
+//               <button class="delete-btn">Delete</button>
+//             </td>
+//           </tr>
+//           <tr>
+//             <td>One</td>
+//             <td>1</td>
+//             <td>Elm Street</td>
+//             <td>January 1, 1951</td>
+//             <td>March 1, 2021</td>
+//             <td>Pending</td>
+//             <td>
+//               <button class="edit-btn">Edit</button>
+//               <button class="delete-btn">Delete</button>
+//             </td>
+//           </tr>
+//            <tr>
+//             <td>Two</td>
+//             <td>12</td>
+//             <td>Palm Street</td>
+//             <td>January 2, 1952</td>
+//             <td>March 2, 2022</td>
+//             <td>Buried</td>
+//             <td>
+//               <button class="edit-btn">Edit</button>
+//               <button class="delete-btn">Delete</button>
+//             </td>
+//           </tr>
+//            <tr>
+//             <td>Three</td>
+//             <td>12</td>
+//             <td>Maple Street</td>
+//             <td>January 3, 1953</td>
+//             <td>March 3, 2023</td>
+//             <td>Pending</td>
+//             <td>
+//               <button class="edit-btn">Edit</button>
+//               <button class="delete-btn">Delete</button>
+//             </td>
+//           </tr>
+//           <tr>
+//             <td>Four</td>
+//             <td>12</td>
+//             <td>Main Street</td>
+//             <td>January 4, 1954</td>
+//             <td>March 4, 2024</td>
+//             <td>Buried</td>
+//             <td>
+//               <button class="edit-btn">Edit</button>
+//               <button class="delete-btn">Delete</button>
+//             </td>
+//           </tr>
+//         </tbody>
+//       </table>
+//     `;
+//   };
+
+// Assuming jsonDeceasedData is already assigned to your JavaScript variable
+jsonDeceasedData.forEach(function(record) {
+    // Create a new table row <tr>
+    var tr = document.createElement("tr");
+
+    // Create and append table data <td> for each column
+    var tdName = document.createElement("td");
+    tdName.textContent = record.name;  // Add name
+    tr.appendChild(tdName);
+
+    var tdLot = document.createElement("td");
+    tdLot.textContent = record.lot;  // Add lot
+    tr.appendChild(tdLot);
+
+    var tdStreet = document.createElement("td");
+    tdStreet.textContent = record.street;  // Add street
+    tr.appendChild(tdStreet);
+
+    var tdBirthDate = document.createElement("td");
+    tdBirthDate.textContent = record.dateofbirth;  // Add birth date
+    tr.appendChild(tdBirthDate);
+
+    var tdDeathDate = document.createElement("td");
+    tdDeathDate.textContent = record.dateofdeath;  // Add death date
+    tr.appendChild(tdDeathDate);
+
+    var tdStatus = document.createElement("td");
+    tdStatus.textContent = record.status;  // Add status
+    tr.appendChild(tdStatus);
+
+    // Add action buttons (Edit and Delete)
+    var tdAction = document.createElement("td");
+
+    var editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.classList.add("edit-btn");
+
+    var deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.classList.add("delete-btn");
+
+    tdAction.appendChild(editBtn);
+    tdAction.appendChild(deleteBtn);
+
+    tr.appendChild(tdAction);
+
+    // Append the new row <tr> to the table body
+    document.getElementById("deceased-table-body").appendChild(tr);
+});
+
 
   // Function to enable editing a row
   const enableEditing = (row) => {
