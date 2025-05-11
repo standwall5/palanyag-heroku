@@ -160,55 +160,26 @@ const generateHome = () => {
 
 // Assuming jsonDeceasedData is already assigned to your JavaScript variable
 const generateDeceasedTable = () => {
+  let tableBody = '';
   jsonDeceasedData.forEach(function(record) {
-      // Create a new table row <tr>
-      var tr = document.createElement("tr");
-
-      // Create and append table data <td> for each column
-      var tdName = document.createElement("td");
-      tdName.textContent = record.name;  // Add name
-      tr.appendChild(tdName);
-
-      var tdLot = document.createElement("td");
-      tdLot.textContent = record.lot;  // Add lot
-      tr.appendChild(tdLot);
-
-      var tdStreet = document.createElement("td");
-      tdStreet.textContent = record.street;  // Add street
-      tr.appendChild(tdStreet);
-
-      var tdBirthDate = document.createElement("td");
-      tdBirthDate.textContent = record.dateofbirth;  // Add birth date
-      tr.appendChild(tdBirthDate);
-
-      var tdDeathDate = document.createElement("td");
-      tdDeathDate.textContent = record.dateofdeath;  // Add death date
-      tr.appendChild(tdDeathDate);
-
-      var tdStatus = document.createElement("td");
-      tdStatus.textContent = record.status;  // Add status
-      tr.appendChild(tdStatus);
-
-      // Add action buttons (Edit and Delete)
-      var tdAction = document.createElement("td");
-
-      var editBtn = document.createElement("button");
-      editBtn.textContent = "Edit";
-      editBtn.classList.add("edit-btn");
-
-      var deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "Delete";
-      deleteBtn.classList.add("delete-btn");
-
-      tdAction.appendChild(editBtn);
-      tdAction.appendChild(deleteBtn);
-
-      tr.appendChild(tdAction);
-
-      // Append the new row <tr> to the table body
-      document.getElementById("deceased-table-body").appendChild(tr);
+    tableBody += `
+      <tr>
+        <td>${record.name}</td>
+        <td>${record.lot}</td>
+        <td>${record.street}</td>
+        <td>${record.dateofbirth}</td>
+        <td>${record.dateofdeath}</td>
+        <td>${record.status}</td>
+        <td>
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn">Delete</button>
+        </td>
+      </tr>
+    `;
   });
-}
+  document.getElementById("deceased-table-body").innerHTML = tableBody;
+};
+
 
 
   // Function to enable editing a row
