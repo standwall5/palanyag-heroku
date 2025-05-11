@@ -15,7 +15,7 @@ try {
   $sql = "SELECT * FROM deceased;";
   $stmt = $pdo->query($sql);
   $deceasedRecords = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  $jsonDeceasedRecords = json_encode($deceasedRecords);
+  $jsonDeceasedData = json_encode($deceasedRecords);
 } catch (PDOException $e) {
   echo "Error " . $e->getMessage();
 }
@@ -35,6 +35,10 @@ try {
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <script>
+    var name = <?php echo $shortName ?>
+    var jsonDeceasedData = <?php echo $jsonDeceasedData; ?>;
+    </script>
 </head>
 
 <body>
@@ -120,10 +124,7 @@ try {
     </div>
 
     <!-- Script -->
-    <script>
-    var name = <?php echo $shortName ?>
-    var jsonDeceasedData = <?php echo $jsonDeceasedData; ?>;
-    </script>
+
     <script src="homeScript.js"></script>
 </body>
 
