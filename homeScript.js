@@ -1,4 +1,5 @@
 let jsonDeceasedData = [];
+let username = '';
 
 async function fetchDeceasedData() {
   try {
@@ -16,6 +17,26 @@ async function fetchDeceasedData() {
 }
 
 fetchDeceasedData();
+
+async function fetchShortName() {
+    try {
+        // Fetch the PHP file that returns the short name
+        const response = await fetch('getName.php'); // Make sure the path is correct
+        
+        // Get the plain text response (short name)
+        username = await response.text();
+        
+        console.log('Short Name:', username);
+        
+        // Now you can use the short name in your JavaScript code
+    } catch (error) {
+        console.error('Error fetching short name:', error);
+    }
+}
+
+// Call the function to fetch the short name
+fetchShortName();
+
 
 
 // Toggle the visibility of a dropdown menu
