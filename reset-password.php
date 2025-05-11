@@ -2,7 +2,7 @@
 $swalPass = '';
 if (isset($_GET['status']) && $_GET['status'] === 'success') {
     $swalPass = "<script>Swal.fire({ title: 'Success!', text: 'Password successfully changed!', icon: 'success', showConfirmButton: true,
-    timer: 1825, confirmButtonText: 'Return to login'}).then((result) => {
+    confirmButtonText: 'Return to login'}).then((result) => {
   if (result.isConfirmed) {
     window.location.href = 'index.php';
   }
