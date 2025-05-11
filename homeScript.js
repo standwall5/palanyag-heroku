@@ -160,25 +160,68 @@ const generateHome = () => {
 
 // Assuming jsonDeceasedData is already assigned to your JavaScript variable
 const generateDeceasedTable = () => {
-  let tableBody = '';
-  jsonDeceasedData.forEach(function(record) {
-    tableBody += `
+  // Assuming jsonDeceasedData contains the data in the same format as the previous example
+  let tableRows = jsonDeceasedData.map(item => {
+    return `
       <tr>
-        <td>${record.name}</td>
-        <td>${record.lot}</td>
-        <td>${record.street}</td>
-        <td>${record.dateofbirth}</td>
-        <td>${record.dateofdeath}</td>
-        <td>${record.status}</td>
+        <td>${item.name}</td>
+        <td>${item.lot}</td>
+        <td>${item.street}</td>
+        <td>${item.dateofbirth}</td>
+        <td>${item.dateofdeath}</td>
+        <td>${item.status}</td>
         <td>
           <button class="edit-btn">Edit</button>
           <button class="delete-btn">Delete</button>
         </td>
       </tr>
     `;
-  });
-  document.getElementById("deceased-table-body").innerHTML = tableBody;
+  }).join('');
+
+  // Return the full HTML table with the populated rows
+  return `
+    <h2>Deceased Records</h2>
+    <div class="search-container">
+      <div class="search-box">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="search-bar" placeholder="Search here" class="search-bar">
+      </div>
+    </div>
+    <!-- Stats Section -->
+    <div class="stats">
+      <div class="stat-box">
+        <h2>${jsonDeceasedData.length}</h2>
+        <p>Total</p>
+      </div>
+      <div class="stat-box">
+        <h2>${jsonDeceasedData.filter(item => item.status === "Buried").length}</h2>
+        <p>Buried</p>
+      </div>
+      <div class="stat-box">
+        <h2>${jsonDeceasedData.filter(item => item.status === "Pending").length}</h2>
+        <p>Pending</p>
+      </div>
+    </div>
+
+    <table class="deceased-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Lot</th>
+          <th>Street</th>
+          <th>Birth Date</th>
+          <th>Death Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="deceased-table-body">
+        ${tableRows}
+      </tbody>
+    </table>
+  `;
 };
+
 
 
 
