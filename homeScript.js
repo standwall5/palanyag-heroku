@@ -237,15 +237,15 @@ function generateDeceasedTable (data) {
     <!-- Stats Section -->
     <div class="stats">
       <div class="stat-box">
-        <h2>${jsonDeceasedData.length}</h2>
+        <h2>${data.length}</h2>
         <p>Total</p>
       </div>
       <div class="stat-box">
-        <h2>${jsonDeceasedData.filter(item => item.status === "Buried").length}</h2>
+        <h2>${data.filter(item => item.status === "Buried").length}</h2>
         <p>Buried</p>
       </div>
       <div class="stat-box">
-        <h2>${jsonDeceasedData.filter(item => item.status === "Pending").length}</h2>
+        <h2>${data.filter(item => item.status === "Pending").length}</h2>
         <p>Pending</p>
       </div>
     </div>
