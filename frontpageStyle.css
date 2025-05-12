@@ -242,6 +242,7 @@ h2 .brand-title {
   z-index: 1;
   position: absolute;
   top: 0;
+  background-color: #bfffb1;
   /* border-radius: 50%; */
 }
 

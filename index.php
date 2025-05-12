@@ -94,6 +94,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v10.5.0/ol.css"> -->
+
     <link rel="stylesheet" href="frontpageStyle.css?v=1.2" />
     <title>Himlayang Palanyag</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -254,9 +256,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     });
     </script>
 
+
     <script src="https://unpkg.com/leaflet-rotate@0.1.1/dist/leaflet-rotate.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/ol@v10.5.0/dist/ol.js"></script> -->
 
-
+    <!-- <script src="openLayers.js"></script> -->
     <script src="map.js"></script>
 
 

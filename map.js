@@ -1,12 +1,34 @@
+var center = [14.48829245842671, 120.98897736022812];
 var map = L.map("map").setView([14.48829245842671, 120.98897736022812], 19);
+var imageUrlBg = "res/images/greenMap.png",
+  imageBounds = [
+    [14.496349, 120.977776],
+    [14.483233, 120.997882],
+  ];
 
-// var imageUrl = "res/images/palanayg.jpg",
+L.imageOverlay(imageUrlBg, imageBounds).addTo(map);
+
+
+// var imageUrl = "res/images/palanyagBgMap.png",
 //   imageBounds = [
 //     [14.48923666666667, 120.98678888888889],
 //     [14.48711444444444, 120.99159888888889],
 //   ];
 
-// L.imageOverlay(imageUrl, imageBounds).addTo(map);
+// var imageUrl = "res/images/palanyagImage.png",
+//   imageBounds = [
+//     [14.490266, 120.985909],
+//     [14.486191, 120.99226],
+//   ];
+
+var imageUrl = "res/images/palanyagImageMap.png",
+  imageBounds = [
+    [14.489344, 120.987311],
+    [14.487205, 120.990651],
+  ];
+
+
+L.imageOverlay(imageUrl, imageBounds).addTo(map);
 
 var CartoDB_Voyager = L.tileLayer(
   "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
@@ -14,14 +36,19 @@ var CartoDB_Voyager = L.tileLayer(
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: "abcd",
-    maxZoom: 20,
-    rotate: true,
+    maxZoom: 21,
   }
 ).addTo(map);
 
-setTimeout(() => {
-  map.setBearing(45);
-}, 1000);
+
+map.on("contextmenu", function (event) {
+  console.log("Coordinates: " + event.latlng.toString());
+  L.marker(event.latlng).addTo(map);
+});
+
+// setTimeout(() => {
+//   map.setBearing(45);
+// }, 1000);
 
 // prototype purposes only
 var cemeteryData = [
@@ -56,6 +83,14 @@ var cemeteryData = [
   },
 ];
 
+var pin = L.icon({
+  iconUrl: "res/images/map-pin.svg",
+
+  iconSize: [25],
+  iconAnchor: [12, 20], 
+
+})
+
 var tomb = L.icon({
   iconUrl: "res/images/tomb.webp",
 
@@ -74,13 +109,13 @@ var startingPoint = [14.488235352726106, 120.98922252199092];
 var fixedRange = -0.0005;
 var pointC = [startingPoint[0] + 0.00023, startingPoint[1] + fixedRange];
 function addPolyline(mapName, coordinates, color = "blue") {
-  polyline = L.polyline(coordinates, { color: color }).addTo(mapName);
+  polyline = L.polyline(coordinates, { color: color, dashArray: '10, 15', dashOffset: '20' }).addTo(mapName);
   return polyline;
 }
 
 // Display all cemetery data on map on load
 cemeteryData.forEach((person) => {
-  let marker = L.marker([person.lat, person.lon], { icon: tomb })
+  let marker = L.marker([person.lat, person.lon], { icon: pin })
     .addTo(map)
     .bindPopup(
       `<b>${person.name}</b><br>Date of Death: ${person.dod}<br>Age: ${person.age}`,
@@ -134,7 +169,7 @@ function searchGrave() {
 }
 
 function resetMap() {
-  map.setView([14.48829245842671, 120.98897736022812], 19);
+  map.setView([14.48829245842671, 120.98897736022812], 19.25);
   if (polyline) map.removeLayer(polyline);
   map.closePopup();
   // reset map
