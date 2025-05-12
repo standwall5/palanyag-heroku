@@ -1,5 +1,6 @@
 let jsonDeceasedData = [];
 let username = '';
+const pages = {};
 
 async function fetchDeceasedData() {
   try {
@@ -27,7 +28,7 @@ async function fetchShortName() {
         username = await response.text();
         
         console.log('Short Name:', username);
-         const pages = {
+          pages = {
           "Home": generateHome(),
           "Deceased": generateDeceasedTable(),
           "Add New": generateAddNewForm(),
