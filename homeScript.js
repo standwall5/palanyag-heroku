@@ -9,10 +9,6 @@ async function fetchDeceasedData() {
 
     jsonDeceasedData = await response.json();
     console.log('jsonDeceasedData:', jsonDeceasedData);
-    pages = {
-          "Deceased": generateDeceasedTable(jsonDeceasedData)
-        };
-
 
     // You can call another function here to use the data
     // displayDeceasedData(jsonDeceasedData);
@@ -32,7 +28,10 @@ async function fetchShortName() {
         username = await response.text();
         
         console.log('Short Name:', username);
-        
+        pages = {
+          "Deceased": generateDeceasedTable()
+        };
+
         
         // Now you can use the short name in your JavaScript code
     } catch (error) {
@@ -206,7 +205,7 @@ const generateHome = () => {
 //   };
 
 // Assuming jsonDeceasedData is already assigned to your JavaScript variable
-function generateDeceasedTable (data) {
+const generateDeceasedTable = (data) => {
   // Assuming jsonDeceasedData contains the data in the same format as the previous example
   let tableRows = data.map(item => {
     return `
@@ -429,9 +428,12 @@ document.addEventListener("input", (event) => {
 
 
   // Define content for each page
-  pages["Home"] = generateHome();
-  pages["Add New"] = generateAddNewForm();
-  pages["Sign Out"] = "<h2>Signing Out...</h2><p>You have been logged out.</p>";
+  const pages = {
+    "Home": generateHome(),
+    "Deceased": generateDeceasedTable(jsonDeceasedData),
+    "Add New": generateAddNewForm(),
+    "Sign Out": "<h2>Signing Out...</h2><p>You have been logged out.</p>"
+  };
 
   // Handle navigation click events
   navLinks.forEach(link => {
