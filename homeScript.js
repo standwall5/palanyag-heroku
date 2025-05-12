@@ -1,6 +1,6 @@
 let jsonDeceasedData = [];
 let username = '';
-const pages = {}
+var pages = {};
 
 const generateDeceasedTable = (data) => {
   // Assuming jsonDeceasedData contains the data in the same format as the previous example
