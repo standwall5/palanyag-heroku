@@ -1,6 +1,6 @@
 let jsonDeceasedData = [];
 let username = '';
-const pages = {};
+const pages = {}
 
 async function fetchDeceasedData() {
   try {
@@ -28,12 +28,10 @@ async function fetchShortName() {
         username = await response.text();
         
         console.log('Short Name:', username);
-          pages = {
-          "Home": generateHome(),
-          "Deceased": generateDeceasedTable(),
-          "Add New": generateAddNewForm(),
-          "Sign Out": "<h2>Signing Out...</h2><p>You have been logged out.</p>"
+        pages = {
+          "Deceased": generateDeceasedTable()
         };
+
         
         // Now you can use the short name in your JavaScript code
     } catch (error) {
@@ -430,7 +428,9 @@ document.addEventListener("input", (event) => {
 
 
   // Define content for each page
- 
+  pages["Home"] = generateHome();
+  pages["Add New"] = generateAddNewForm();
+  pages["Sign Out"] = "<h2>Signing Out...</h2><p>You have been logged out.</p>";
 
   // Handle navigation click events
   navLinks.forEach(link => {
