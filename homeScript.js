@@ -399,9 +399,6 @@ async function fetchDeceasedData() {
 
     jsonDeceasedData = await response.json();
     console.log('jsonDeceasedData:', jsonDeceasedData);
-    pages = {
-          "Deceased": generateDeceasedTable(jsonDeceasedData)
-        };
 
     // You can call another function here to use the data
     // displayDeceasedData(jsonDeceasedData);
