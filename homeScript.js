@@ -1,6 +1,4 @@
-let jsonDeceasedData = [];
-let username = '';
-var pages = {};
+
 
 const generateDeceasedTable = (data) => {
   // Assuming jsonDeceasedData contains the data in the same format as the previous example
@@ -65,6 +63,10 @@ const generateDeceasedTable = (data) => {
   `;
 };
 
+let jsonDeceasedData = [];
+let username = '';
+var pages = {};
+
 async function fetchDeceasedData() {
   try {
     const response = await fetch('getDeceasedData.php');
@@ -83,7 +85,8 @@ async function fetchDeceasedData() {
   }
 }
 
-fetchDeceasedData();
+
+
 
 async function fetchShortName() {
     try {
@@ -103,7 +106,6 @@ async function fetchShortName() {
 }
 
 // Call the function to fetch the short name
-fetchShortName();
 
 
 
@@ -427,7 +429,8 @@ document.addEventListener("input", (event) => {
   };
 
 
-
+fetchDeceasedData();
+fetchShortName();
 
   // Define content for each page
   pages = {
