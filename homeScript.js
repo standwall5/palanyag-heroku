@@ -430,9 +430,12 @@ document.addEventListener("input", (event) => {
 
 
   // Define content for each page
-  pages["Home"] = generateHome();
-  pages["Add New"] = generateAddNewForm();
-  pages["Sign Out"] = "<h2>Signing Out...</h2><p>You have been logged out.</p>";
+  pages = {
+    "Home": generateHome(),
+    "Deceased": generateDeceasedTable(jsonDeceasedData),
+    "Add New": generateAddNewForm(),
+    "Sign Out": "<h2>Signing Out...</h2><p>You have been logged out.</p>"
+  };
 
   // Handle navigation click events
   navLinks.forEach(link => {
