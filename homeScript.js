@@ -9,6 +9,10 @@ async function fetchDeceasedData() {
 
     jsonDeceasedData = await response.json();
     console.log('jsonDeceasedData:', jsonDeceasedData);
+    pages = {
+          "Deceased": generateDeceasedTable(jsonDeceasedData)
+        };
+
 
     // You can call another function here to use the data
     // displayDeceasedData(jsonDeceasedData);
@@ -28,10 +32,7 @@ async function fetchShortName() {
         username = await response.text();
         
         console.log('Short Name:', username);
-        pages = {
-          "Deceased": generateDeceasedTable()
-        };
-
+        
         
         // Now you can use the short name in your JavaScript code
     } catch (error) {
@@ -205,9 +206,9 @@ const generateHome = () => {
 //   };
 
 // Assuming jsonDeceasedData is already assigned to your JavaScript variable
-const generateDeceasedTable = () => {
+function generateDeceasedTable (data) {
   // Assuming jsonDeceasedData contains the data in the same format as the previous example
-  let tableRows = jsonDeceasedData.map(item => {
+  let tableRows = data.map(item => {
     return `
       <tr>
         <td>${item.name}</td>
