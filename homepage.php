@@ -39,6 +39,7 @@ try {
     var name = <?php echo $shortName ?>
     <?php echo $jsonDeceasedData ?>;
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
