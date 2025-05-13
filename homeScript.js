@@ -1,3 +1,12 @@
+const formatDate = (dateStr) => {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+};
+
 const generateDeceasedTable = (data) => {
   // Assuming jsonDeceasedData contains the data in the same format as the previous example
   let tableRows = data
@@ -549,7 +558,7 @@ style.innerHTML = `
 document.head.appendChild(style);
 
 function claim(deceasedId) {
-  const postData = {
+  var postData = {
     userId: userData.userId,
     deceasedid: deceasedId,
   };
