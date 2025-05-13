@@ -7,11 +7,13 @@ const generateDeceasedTable = (data) => {
         <td>${item.name}</td>
         <td>${item.lot}</td>
         <td>${item.street}</td>
-        <td>${item.dateofbirth}</td>
-        <td>${item.dateofdeath}</td>
+        <td>${formatDate(item.dateofbirth)}</td>
+        <td>${formatDate(item.dateofdeath)}</td>
         <td>${item.status}</td>
         <td>
-          <button class="claim-btn" onclick="claim(${item.deceasedid})">Claim as Loved One</button>
+          <button class="claim-btn" onclick="claim(${
+            item.deceasedid
+          })">Claim as Loved One</button>
         </td>
       </tr>
     `;
@@ -120,9 +122,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const mainContent = document.getElementById("main-content");
 
   // Function to generate the Add New form
-  const generateHome = () => {
+  const generateHome = (username) => {
     return `
-    <h2>Welcome to Himlayang Palanyag ${userData.shortName}</h2>
+    <h2>Welcome to Himlayang Palanyag ${username}</h2>
     <div class="search-container">
             <div class="search-box">
         <i class="fas fa-search search-icon"></i>
@@ -417,7 +419,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       console.log(userData);
       pages = {
-        Home: generateHome(),
+        Home: generateHome(userData.shortName),
         Deceased: generateDeceasedTable(jsonDeceasedData),
         "Add New": generateAddNewForm(),
         "Sign Out": "<h2>Signing Out...</h2><p>You have been logged out.</p>",
