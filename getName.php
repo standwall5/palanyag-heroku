@@ -10,4 +10,10 @@ if (count($nameParts) === 3) {
     $shortName = $fullName; // Keep the original name if it's not exactly 3 words
 }
 
-echo $shortName;
+  $response = [
+    "shortName" => $shortName,
+    "userId" => $_SESSION['user_id']
+];
+
+header('Content-Type: application/json');
+echo json_encode($response);

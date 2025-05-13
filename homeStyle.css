@@ -347,12 +347,17 @@ body {
 
 
 /* Action Buttons */
-.edit-btn, .delete-btn {
+.edit-btn, .delete-btn, .claim-btn {
   padding: 8px 12px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
+}
+
+.claim-btn {
+  background: #b44e70;
+  color: white;
 }
 
 .edit-btn {

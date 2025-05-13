@@ -1,9 +1,8 @@
-
-
 const generateDeceasedTable = (data) => {
   // Assuming jsonDeceasedData contains the data in the same format as the previous example
-  let tableRows = data.map(item => {
-    return `
+  let tableRows = data
+    .map((item) => {
+      return `
       <tr>
         <td>${item.name}</td>
         <td>${item.lot}</td>
@@ -12,12 +11,12 @@ const generateDeceasedTable = (data) => {
         <td>${item.dateofdeath}</td>
         <td>${item.status}</td>
         <td>
-          <button class="edit-btn">Edit</button>
-          <button class="delete-btn">Delete</button>
+          <button class="claim-btn" onclick="claim(${item.deceasedid})">Claim as Loved One</button>
         </td>
       </tr>
     `;
-  }).join('');
+    })
+    .join("");
 
   // Return the full HTML table with the populated rows
   return `
@@ -35,11 +34,11 @@ const generateDeceasedTable = (data) => {
         <p>Total</p>
       </div>
       <div class="stat-box">
-        <h2>${data.filter(item => item.status === "Buried").length}</h2>
+        <h2>${data.filter((item) => item.status === "Buried").length}</h2>
         <p>Buried</p>
       </div>
       <div class="stat-box">
-        <h2>${data.filter(item => item.status === "Pending").length}</h2>
+        <h2>${data.filter((item) => item.status === "Pending").length}</h2>
         <p>Pending</p>
       </div>
     </div>
@@ -64,14 +63,10 @@ const generateDeceasedTable = (data) => {
 };
 
 let jsonDeceasedData = [];
-let username = '';
+let userData = [];
 var pages = {};
 
-
-
 // Call the function to fetch the short name
-
-
 
 // Toggle the visibility of a dropdown menu
 const toggleDropdown = (dropdown, menu, isOpen) => {
@@ -81,9 +76,15 @@ const toggleDropdown = (dropdown, menu, isOpen) => {
 
 // Close all open dropdowns
 const closeAllDropdowns = () => {
-  document.querySelectorAll(".dropdown-container.open").forEach((openDropdown) => {
-    toggleDropdown(openDropdown, openDropdown.querySelector(".dropdown-menu"), false);
-  });
+  document
+    .querySelectorAll(".dropdown-container.open")
+    .forEach((openDropdown) => {
+      toggleDropdown(
+        openDropdown,
+        openDropdown.querySelector(".dropdown-menu"),
+        false
+      );
+    });
 };
 
 // Attach click event to all dropdown toggles
@@ -101,23 +102,26 @@ document.querySelectorAll(".dropdown-toggle").forEach((dropdownToggle) => {
 });
 
 // Attach click event to sidebar toggle buttons
-document.querySelectorAll(".sidebar-toggler, .sidebar-menu-button").forEach((button) => {
-  button.addEventListener("click", () => {
-    closeAllDropdowns(); // Close all open dropdowns
-    document.querySelector(".sidebar").classList.toggle("collapsed"); // Toggle collapsed class on sidebar
+document
+  .querySelectorAll(".sidebar-toggler, .sidebar-menu-button")
+  .forEach((button) => {
+    button.addEventListener("click", () => {
+      closeAllDropdowns(); // Close all open dropdowns
+      document.querySelector(".sidebar").classList.toggle("collapsed"); // Toggle collapsed class on sidebar
+    });
   });
-});
 
 // Collapse sidebar by default on small screens
-if (window.innerWidth <= 1024) document.querySelector(".sidebar").classList.add("collapsed");
+if (window.innerWidth <= 1024)
+  document.querySelector(".sidebar").classList.add("collapsed");
 
 document.addEventListener("DOMContentLoaded", function () {
   const navLinks = document.querySelectorAll(".nav-link");
   const mainContent = document.getElementById("main-content");
 
   // Function to generate the Add New form
-const generateHome = () => {
-  return `
+  const generateHome = () => {
+    return `
     <h2>Welcome to Himlayang Palanyag ${username}</h2>
     <div class="search-container">
             <div class="search-box">
@@ -126,118 +130,114 @@ const generateHome = () => {
       </div>
 </div>
   `;
-};
+  };
 
   // Function to generate the deceased table
-//   const generateDeceasedTable = () => {
-//     return `
-  
-//       <h2>Deceased Records</h2>
-//      <div class="search-container">
-//             <div class="search-box">
-//         <i class="fas fa-search search-icon"></i>
-//         <input type="text" id="search-bar" placeholder="Search here" class="search-bar">
-//       </div>
-// </div>
-// <!-- Stats Section -->
-//             <div class="stats">
-//                 <div class="stat-box">
-//                     <h2>0</h2>
-//                     <p>Total</p>
-//                 </div>
-//                 <div class="stat-box">
-//                     <h2>0</h2>
-//                     <p>Buried</p>
-//                 </div>
-//                 <div class="stat-box">
-//                     <h2>0</h2>
-//                     <p>Pending</p>
-//                 </div>
-//             </div>
+  //   const generateDeceasedTable = () => {
+  //     return `
 
-//       <table class="deceased-table">
-//         <thead>
-//           <tr>
-//             <th>Name</th>
-//             <th>Lot</th>
-//             <th>Street</th>
-//             <th>Birth Date</th>
-//             <th>Death Date</th>
-//             <th>Status</th>
-//             <th>Action</th>
-//           </tr>
-//         </thead>
-//         <tbody id="deceased-table-body">
-//           <tr>
-//             <td>Juan Dela Cruz</td>
-//             <td>12</td>
-//             <td>Main Street</td>
-//             <td>January 1, 1950</td>
-//             <td>March 5, 2020</td>
-//             <td>Buried</td>
-//             <td>
-//               <button class="edit-btn">Edit</button>
-//               <button class="delete-btn">Delete</button>
-//             </td>
-//           </tr>
-//           <tr>
-//             <td>One</td>
-//             <td>1</td>
-//             <td>Elm Street</td>
-//             <td>January 1, 1951</td>
-//             <td>March 1, 2021</td>
-//             <td>Pending</td>
-//             <td>
-//               <button class="edit-btn">Edit</button>
-//               <button class="delete-btn">Delete</button>
-//             </td>
-//           </tr>
-//            <tr>
-//             <td>Two</td>
-//             <td>12</td>
-//             <td>Palm Street</td>
-//             <td>January 2, 1952</td>
-//             <td>March 2, 2022</td>
-//             <td>Buried</td>
-//             <td>
-//               <button class="edit-btn">Edit</button>
-//               <button class="delete-btn">Delete</button>
-//             </td>
-//           </tr>
-//            <tr>
-//             <td>Three</td>
-//             <td>12</td>
-//             <td>Maple Street</td>
-//             <td>January 3, 1953</td>
-//             <td>March 3, 2023</td>
-//             <td>Pending</td>
-//             <td>
-//               <button class="edit-btn">Edit</button>
-//               <button class="delete-btn">Delete</button>
-//             </td>
-//           </tr>
-//           <tr>
-//             <td>Four</td>
-//             <td>12</td>
-//             <td>Main Street</td>
-//             <td>January 4, 1954</td>
-//             <td>March 4, 2024</td>
-//             <td>Buried</td>
-//             <td>
-//               <button class="edit-btn">Edit</button>
-//               <button class="delete-btn">Delete</button>
-//             </td>
-//           </tr>
-//         </tbody>
-//       </table>
-//     `;
-//   };
+  //       <h2>Deceased Records</h2>
+  //      <div class="search-container">
+  //             <div class="search-box">
+  //         <i class="fas fa-search search-icon"></i>
+  //         <input type="text" id="search-bar" placeholder="Search here" class="search-bar">
+  //       </div>
+  // </div>
+  // <!-- Stats Section -->
+  //             <div class="stats">
+  //                 <div class="stat-box">
+  //                     <h2>0</h2>
+  //                     <p>Total</p>
+  //                 </div>
+  //                 <div class="stat-box">
+  //                     <h2>0</h2>
+  //                     <p>Buried</p>
+  //                 </div>
+  //                 <div class="stat-box">
+  //                     <h2>0</h2>
+  //                     <p>Pending</p>
+  //                 </div>
+  //             </div>
 
-// Assuming jsonDeceasedData is already assigned to your JavaScript variable
+  //       <table class="deceased-table">
+  //         <thead>
+  //           <tr>
+  //             <th>Name</th>
+  //             <th>Lot</th>
+  //             <th>Street</th>
+  //             <th>Birth Date</th>
+  //             <th>Death Date</th>
+  //             <th>Status</th>
+  //             <th>Action</th>
+  //           </tr>
+  //         </thead>
+  //         <tbody id="deceased-table-body">
+  //           <tr>
+  //             <td>Juan Dela Cruz</td>
+  //             <td>12</td>
+  //             <td>Main Street</td>
+  //             <td>January 1, 1950</td>
+  //             <td>March 5, 2020</td>
+  //             <td>Buried</td>
+  //             <td>
+  //               <button class="edit-btn">Edit</button>
+  //               <button class="delete-btn">Delete</button>
+  //             </td>
+  //           </tr>
+  //           <tr>
+  //             <td>One</td>
+  //             <td>1</td>
+  //             <td>Elm Street</td>
+  //             <td>January 1, 1951</td>
+  //             <td>March 1, 2021</td>
+  //             <td>Pending</td>
+  //             <td>
+  //               <button class="edit-btn">Edit</button>
+  //               <button class="delete-btn">Delete</button>
+  //             </td>
+  //           </tr>
+  //            <tr>
+  //             <td>Two</td>
+  //             <td>12</td>
+  //             <td>Palm Street</td>
+  //             <td>January 2, 1952</td>
+  //             <td>March 2, 2022</td>
+  //             <td>Buried</td>
+  //             <td>
+  //               <button class="edit-btn">Edit</button>
+  //               <button class="delete-btn">Delete</button>
+  //             </td>
+  //           </tr>
+  //            <tr>
+  //             <td>Three</td>
+  //             <td>12</td>
+  //             <td>Maple Street</td>
+  //             <td>January 3, 1953</td>
+  //             <td>March 3, 2023</td>
+  //             <td>Pending</td>
+  //             <td>
+  //               <button class="edit-btn">Edit</button>
+  //               <button class="delete-btn">Delete</button>
+  //             </td>
+  //           </tr>
+  //           <tr>
+  //             <td>Four</td>
+  //             <td>12</td>
+  //             <td>Main Street</td>
+  //             <td>January 4, 1954</td>
+  //             <td>March 4, 2024</td>
+  //             <td>Buried</td>
+  //             <td>
+  //               <button class="edit-btn">Edit</button>
+  //               <button class="delete-btn">Delete</button>
+  //             </td>
+  //           </tr>
+  //         </tbody>
+  //       </table>
+  //     `;
+  //   };
 
-
-
-
+  // Assuming jsonDeceasedData is already assigned to your JavaScript variable
 
   // Function to enable editing a row
   const enableEditing = (row) => {
@@ -263,8 +263,8 @@ const generateHome = () => {
     row.querySelector(".edit-btn").classList.remove("save-btn");
   };
 
-   // Function to delete a row with confirmation
-   const deleteRow = (row) => {
+  // Function to delete a row with confirmation
+  const deleteRow = (row) => {
     if (confirm("Are you sure you want to delete this record?")) {
       row.remove();
     }
@@ -284,35 +284,36 @@ const generateHome = () => {
     }
   });
 
+  // Function to search deceased records
+  const searchRecords = () => {
+    const searchTerm = document
+      .getElementById("search-bar")
+      .value.toLowerCase();
+    const rows = document.querySelectorAll("#deceased-table-body tr");
 
- // Function to search deceased records
-const searchRecords = () => {
-  const searchTerm = document.getElementById("search-bar").value.toLowerCase();
-  const rows = document.querySelectorAll("#deceased-table-body tr");
+    rows.forEach((row) => {
+      const cells = row.querySelectorAll("td");
+      let matchFound = false;
 
-  rows.forEach(row => {
-    const cells = row.querySelectorAll("td");
-    let matchFound = false;
+      cells.forEach((cell, index) => {
+        let cellText = cell.textContent.toLowerCase();
 
-    cells.forEach((cell, index) => {
-      let cellText = cell.textContent.toLowerCase();
+        // Ensure we are not filtering "Edit" and "Delete" actions (assuming they are in the last column)
+        if (index < cells.length - 1 && cellText.includes(searchTerm)) {
+          matchFound = true;
+        }
+      });
 
-      // Ensure we are not filtering "Edit" and "Delete" actions (assuming they are in the last column)
-      if (index < cells.length - 1 && cellText.includes(searchTerm)) {
-        matchFound = true;
-      }
+      row.style.display = matchFound ? "" : "none";
     });
+  };
 
-    row.style.display = matchFound ? "" : "none";
+  // Ensure event listener for search button is added after content loads
+  document.addEventListener("input", (event) => {
+    if (event.target.id === "search-bar") {
+      searchRecords();
+    }
   });
-};
-
-// Ensure event listener for search button is added after content loads
-document.addEventListener("input", (event) => {
-  if (event.target.id === "search-bar") {
-    searchRecords();
-  }
-});
 
   // Event delegation for edit and delete buttons
   document.addEventListener("click", (event) => {
@@ -330,7 +331,6 @@ document.addEventListener("input", (event) => {
     }
   });
 
-  
   // Function to generate the Add New form
   const generateAddNewForm = () => {
     const currentYear = new Date().getFullYear();
@@ -392,56 +392,55 @@ document.addEventListener("input", (event) => {
     `;
   };
 
-async function fetchDeceasedData() {
-  try {
-    const response = await fetch('getDeceasedData.php');
-    if (!response.ok) throw new Error('Network response was not ok');
-
-    jsonDeceasedData = await response.json();
-    console.log('jsonDeceasedData:', jsonDeceasedData);
-
-    // You can call another function here to use the data
-    // displayDeceasedData(jsonDeceasedData);
-  } catch (error) {
-    console.error('Fetch error:', error);
-  }
-}
-
-async function fetchShortName() {
+  async function fetchDeceasedData() {
     try {
-        // Fetch the PHP file that returns the short name
-        const response = await fetch('getName.php'); // Make sure the path is correct
-        
-        // Get the plain text response (short name)
-        username = await response.text();
-        
-        console.log('Short Name:', username);
-        pages = {
-          "Home": generateHome(),
-          "Deceased": generateDeceasedTable(jsonDeceasedData),
-          "Add New": generateAddNewForm(),
-          "Sign Out": "<h2>Signing Out...</h2><p>You have been logged out.</p>"
-        };
-        
-        // Now you can use the short name in your JavaScript code
+      const response = await fetch("getDeceasedData.php");
+      if (!response.ok) throw new Error("Network response was not ok");
+
+      jsonDeceasedData = await response.json();
+      console.log("jsonDeceasedData:", jsonDeceasedData);
+
+      // You can call another function here to use the data
+      // displayDeceasedData(jsonDeceasedData);
     } catch (error) {
-        console.error('Error fetching short name:', error);
+      console.error("Fetch error:", error);
     }
-}
-fetchDeceasedData();
-fetchShortName();
+  }
+
+  async function fetchUserData() {
+    try {
+      // Fetch the PHP file that returns the short name
+      const response = await fetch("getName.php"); // Make sure the path is correct
+
+      // Get the plain text response (short name)
+      userData = await response.json();
+
+      console.log(userData);
+      pages = {
+        Home: generateHome(),
+        Deceased: generateDeceasedTable(jsonDeceasedData),
+        "Add New": generateAddNewForm(),
+        "Sign Out": "<h2>Signing Out...</h2><p>You have been logged out.</p>",
+      };
+
+      // Now you can use the short name in your JavaScript code
+    } catch (error) {
+      console.error("Error fetching short name:", error);
+    }
+  }
+  fetchDeceasedData();
+  fetchUserData();
 
   // Define content for each page
-  
 
   // Handle navigation click events
-  navLinks.forEach(link => {
+  navLinks.forEach((link) => {
     link.addEventListener("click", function (event) {
       event.preventDefault();
 
       // Remove active class from all links
-      navLinks.forEach(item => item.classList.remove("active"));
-      
+      navLinks.forEach((item) => item.classList.remove("active"));
+
       // Add active class to the clicked link
       this.classList.add("active");
 
@@ -452,76 +451,91 @@ fetchShortName();
 
         // Add event listener for form submission
         if (pageName === "Add New") {
-          document.getElementById("add-new-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-            alert("Form submitted! (You can replace this with database integration)");
-          });
+          document
+            .getElementById("add-new-form")
+            .addEventListener("submit", function (e) {
+              e.preventDefault();
+              alert(
+                "Form submitted! (You can replace this with database integration)"
+              );
+            });
           // Attach input restrictions
           addInputRestrictions();
         }
       }
     });
   });
-
 });
 
 //Function for Restrictions
-  function addInputRestrictions() {
-    // Get input elements
-    const fnameInput = document.getElementById("fname");
-    const lnameInput = document.getElementById("lname");
-    const lotInput = document.getElementById("lot");
-  
-    // Function to prevent invalid input and show error message
-    function restrictInput(event, regex, errorId, errorMessage) {
-      const char = event.key;
-      if (!regex.test(char)) {
-        event.preventDefault(); // Block the input
-        showError(errorId, errorMessage);
-      } else {
-        hideError(errorId);
-      }
-    }
-  
-    // Restrict First and Last Name to only letters and spaces
-    fnameInput.addEventListener("keypress", function (event) {
-      restrictInput(event, /^[a-zA-Z\s]$/, "fname-error", "Only letters and spaces allowed!");
-    });
-  
-    lnameInput.addEventListener("keypress", function (event) {
-      restrictInput(event, /^[a-zA-Z\s]$/, "lname-error", "Only letters and spaces allowed!");
-    });
-  
-    // Restrict Lot No to only numbers
-    lotInput.addEventListener("keypress", function (event) {
-      restrictInput(event, /^[0-9]$/, "lot-error", "Only numbers allowed!");
-    });
-  }
-  
-  // Show error message
-  function showError(id, message) {
-    let errorElement = document.getElementById(id);
-    if (!errorElement) {
-      errorElement = document.createElement("p");
-      errorElement.id = id;
-      errorElement.classList.add("error-message");
-      document.getElementById(id.replace("-error", "")).insertAdjacentElement("afterend", errorElement);
-    }
-    errorElement.textContent = message;
-  }
-  
-  // Hide error message
-  function hideError(id) {
-    let errorElement = document.getElementById(id);
-    if (errorElement) {
-      errorElement.textContent = "";
-    }
-  }
-  
-  // Run function after DOM loads
-  document.addEventListener("DOMContentLoaded", addInputRestrictions);  
+function addInputRestrictions() {
+  // Get input elements
+  const fnameInput = document.getElementById("fname");
+  const lnameInput = document.getElementById("lname");
+  const lotInput = document.getElementById("lot");
 
-  // Style of error message
+  // Function to prevent invalid input and show error message
+  function restrictInput(event, regex, errorId, errorMessage) {
+    const char = event.key;
+    if (!regex.test(char)) {
+      event.preventDefault(); // Block the input
+      showError(errorId, errorMessage);
+    } else {
+      hideError(errorId);
+    }
+  }
+
+  // Restrict First and Last Name to only letters and spaces
+  fnameInput.addEventListener("keypress", function (event) {
+    restrictInput(
+      event,
+      /^[a-zA-Z\s]$/,
+      "fname-error",
+      "Only letters and spaces allowed!"
+    );
+  });
+
+  lnameInput.addEventListener("keypress", function (event) {
+    restrictInput(
+      event,
+      /^[a-zA-Z\s]$/,
+      "lname-error",
+      "Only letters and spaces allowed!"
+    );
+  });
+
+  // Restrict Lot No to only numbers
+  lotInput.addEventListener("keypress", function (event) {
+    restrictInput(event, /^[0-9]$/, "lot-error", "Only numbers allowed!");
+  });
+}
+
+// Show error message
+function showError(id, message) {
+  let errorElement = document.getElementById(id);
+  if (!errorElement) {
+    errorElement = document.createElement("p");
+    errorElement.id = id;
+    errorElement.classList.add("error-message");
+    document
+      .getElementById(id.replace("-error", ""))
+      .insertAdjacentElement("afterend", errorElement);
+  }
+  errorElement.textContent = message;
+}
+
+// Hide error message
+function hideError(id) {
+  let errorElement = document.getElementById(id);
+  if (errorElement) {
+    errorElement.textContent = "";
+  }
+}
+
+// Run function after DOM loads
+document.addEventListener("DOMContentLoaded", addInputRestrictions);
+
+// Style of error message
 const style = document.createElement("style");
 style.innerHTML = `
   .error-message {
@@ -532,3 +546,30 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 
+function claim(deceasedId) {
+  const postData = {
+    userId: userData.userId,
+    deceasedid: deceasedId,
+  };
+
+  fetch("claim.php", {
+    method: "POST", // Use POST method
+    headers: {
+      "Content-Type": "application/json", // Sending JSON data
+    },
+    body: JSON.stringify(postData), // Convert JavaScript object to JSON string
+  })
+    .then((response) => response.json()) // Get the PHP output as text
+    .then((data) => {
+      Swal.fire({
+        title: "Done",
+        text: data.message,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1825,
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}

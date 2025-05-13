@@ -5,19 +5,19 @@ $nameParts = explode(" ", $fullName);
 
 // Get the first two words (if available)
 if (count($nameParts) === 3) {
-  $shortName = $nameParts[0] . " " . $nameParts[1]; // Get only the first two words
+    $shortName = $nameParts[0] . " " . $nameParts[1]; // Get only the first two words
 } else {
-  $shortName = $fullName; // Keep the original name if it's not exactly 3 words
+    $shortName = $fullName; // Keep the original name if it's not exactly 3 words
 }
 
 require 'db.php';
 try {
-  $sql = "SELECT * FROM deceased;";
-  $stmt = $pdo->query($sql);
-  $deceasedRecords = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  $jsonDeceasedData = json_encode($deceasedRecords);
+    $sql = "SELECT * FROM deceased;";
+    $stmt = $pdo->query($sql);
+    $deceasedRecords = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $jsonDeceasedData = json_encode($deceasedRecords);
 } catch (PDOException $e) {
-  echo "Error " . $e->getMessage();
+    echo "Error " . $e->getMessage();
 }
 ?>
 
@@ -36,8 +36,8 @@ try {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <script>
-    var name = <?php echo $shortName ?>
-    var jsonDeceasedData = <?php echo $jsonDeceasedData ?>;
+        var name = <?php echo $shortName ?>
+        var jsonDeceasedData = <?php echo $jsonDeceasedData ?>;
     </script>
 </head>
 
@@ -124,7 +124,8 @@ try {
     </div>
 
     <!-- Script -->
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="homeScript.js"></script>
 </body>
 
