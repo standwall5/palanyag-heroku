@@ -8,6 +8,8 @@ const formatDate = (dateStr) => {
 };
 
 const generateDeceasedTable = (data) => {
+  fetchDeceasedData();
+
   // Assuming jsonDeceasedData contains the data in the same format as the previous example
   let tableRows = data
     .map((item) => {
@@ -439,7 +441,6 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Error fetching short name:", error);
     }
   }
-  fetchDeceasedData();
   fetchUserData();
 
   // Define content for each page
