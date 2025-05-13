@@ -418,7 +418,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  fetchDeceasedData();
+  while (jsonDeceasedData == []) {
+    fetchDeceasedData();
+  }
 
   async function fetchUserData() {
     try {
@@ -442,9 +444,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  fetchUserData();
-
+  if (jsonDeceasedData != []) {
+    fetchUserData();
+  }
   // Define content for each page
+
+  if (jsonDeceasedData != []) {
+    throw new Error("jsonData is blank"); // halts execution
+  }
 
   // Handle navigation click events
   navLinks.forEach((link) => {
