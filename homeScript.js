@@ -431,12 +431,6 @@ document.addEventListener("DOMContentLoaded", function () {
       userData = await response.json();
 
       console.log(userData);
-      pages = {
-        Home: generateHome(userData.shortName),
-        Deceased: generateDeceasedTable(jsonDeceasedData),
-        "Add New": generateAddNewForm(),
-        "Sign Out": "<h2>Signing Out...</h2><p>You have been logged out.</p>",
-      };
 
       // Now you can use the short name in your JavaScript code
     } catch (error) {
@@ -444,14 +438,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  if (jsonDeceasedData != []) {
-    fetchUserData();
-  }
-  // Define content for each page
+  async function initializeData() {
+    // First, fetch the deceased data
+    await fetchDeceasedData();
 
-  if (jsonDeceasedData != []) {
-    throw new Error("jsonData is blank"); // halts execution
+    // Then, fetch the user data
+    await fetchUserData();
+
+    // After both are fetched, you can proceed with the following logic
+    console.log("Both data loaded successfully.");
+    pages = {
+      Home: generateHome(userData.shortName),
+      Deceased: generateDeceasedTable(jsonDeceasedData),
+      "Add New": generateAddNewForm(),
+      "Sign Out": "<h2>Signing Out...</h2><p>You have been logged out.</p>",
+    };
+    // Now you can use the data to render or proceed with other operations
   }
+
+  initializeData(); // Call the function to initialize everything
 
   // Handle navigation click events
   navLinks.forEach((link) => {
