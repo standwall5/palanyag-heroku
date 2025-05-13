@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Function to generate the Add New form
   const generateHome = () => {
     return `
-    <h2>Welcome to Himlayang Palanyag ${username}</h2>
+    <h2>Welcome to Himlayang Palanyag ${userData.shortName}</h2>
     <div class="search-container">
             <div class="search-box">
         <i class="fas fa-search search-icon"></i>
