@@ -570,6 +570,12 @@ function claim(deceasedId) {
       });
     })
     .catch((error) => {
-      console.error("Error:", error);
+      Swal.fire({
+        title: "Error",
+        text: error,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1825,
+      });
     });
 }
