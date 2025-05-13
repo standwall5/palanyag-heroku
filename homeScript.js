@@ -565,7 +565,7 @@ function claim(deceasedId) {
     deceasedid: deceasedId,
   };
 
-  fetch("claim.php", {
+  fetch("res/claim.php", {
     method: "POST", // Use POST method
     headers: {
       "Content-Type": "application/json", // Sending JSON data

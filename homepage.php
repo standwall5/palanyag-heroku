@@ -127,7 +127,7 @@ try {
     <!-- Script -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="homeScript.js"></script>
+    <script src="homeScript.js?v=1.2"></script>
 </body>
 
 </html>
