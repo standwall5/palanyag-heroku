@@ -251,35 +251,35 @@ document.addEventListener("DOMContentLoaded", function () {
   // Assuming jsonDeceasedData is already assigned to your JavaScript variable
 
   // Function to enable editing a row
-  const enableEditing = (row) => {
-    const cells = row.querySelectorAll("td");
-    for (let i = 0; i < cells.length - 2; i++) {
-      let input = document.createElement("input");
-      input.type = "text";
-      input.value = cells[i].textContent;
-      cells[i].textContent = "";
-      cells[i].appendChild(input);
-    }
-    row.querySelector(".edit-btn").textContent = "Save";
-    row.querySelector(".edit-btn").classList.add("save-btn");
-  };
+  // const enableEditing = (row) => {
+  //   const cells = row.querySelectorAll("td");
+  //   for (let i = 0; i < cells.length - 2; i++) {
+  //     let input = document.createElement("input");
+  //     input.type = "text";
+  //     input.value = cells[i].textContent;
+  //     cells[i].textContent = "";
+  //     cells[i].appendChild(input);
+  //   }
+  //   row.querySelector(".edit-btn").textContent = "Save";
+  //   row.querySelector(".edit-btn").classList.add("save-btn");
+  // };
 
   // Function to save edited row
-  const saveEditedRow = (row) => {
-    const inputs = row.querySelectorAll("input");
-    inputs.forEach((input, index) => {
-      row.cells[index].textContent = input.value;
-    });
-    row.querySelector(".edit-btn").textContent = "Edit";
-    row.querySelector(".edit-btn").classList.remove("save-btn");
-  };
+  // const saveEditedRow = (row) => {
+  //   const inputs = row.querySelectorAll("input");
+  //   inputs.forEach((input, index) => {
+  //     row.cells[index].textContent = input.value;
+  //   });
+  //   row.querySelector(".edit-btn").textContent = "Edit";
+  //   row.querySelector(".edit-btn").classList.remove("save-btn");
+  // };
 
   // Function to delete a row with confirmation
-  const deleteRow = (row) => {
-    if (confirm("Are you sure you want to delete this record?")) {
-      row.remove();
-    }
-  };
+  // const deleteRow = (row) => {
+  //   if (confirm("Are you sure you want to delete this record?")) {
+  //     row.remove();
+  //   }
+  // };
   // Function to handle Enter key for saving
   document.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
@@ -327,20 +327,20 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Event delegation for edit and delete buttons
-  document.addEventListener("click", (event) => {
-    if (event.target.classList.contains("edit-btn")) {
-      const row = event.target.closest("tr");
-      if (event.target.classList.contains("save-btn")) {
-        saveEditedRow(row);
-      } else {
-        enableEditing(row);
-      }
-    }
-    if (event.target.classList.contains("delete-btn")) {
-      const row = event.target.closest("tr");
-      deleteRow(row);
-    }
-  });
+  // document.addEventListener("click", (event) => {
+  //   if (event.target.classList.contains("edit-btn")) {
+  //     const row = event.target.closest("tr");
+  //     if (event.target.classList.contains("save-btn")) {
+  //       saveEditedRow(row);
+  //     } else {
+  //       enableEditing(row);
+  //     }
+  //   }
+  //   if (event.target.classList.contains("delete-btn")) {
+  //     const row = event.target.closest("tr");
+  //     deleteRow(row);
+  //   }
+  // });
 
   // Function to generate the Add New form
   const generateAddNewForm = () => {
