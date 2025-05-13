@@ -584,8 +584,14 @@ function claim(deceasedId) {
     },
     body: JSON.stringify(postData), // Convert JavaScript object to JSON string
   })
-    .then((response) => response.json()) // Get the PHP output as text
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json(); // Try parsing the JSON
+    })
     .then((data) => {
+      console.log(data);
       Swal.fire({
         title: "Done",
         text: data.message,
@@ -595,9 +601,10 @@ function claim(deceasedId) {
       });
     })
     .catch((error) => {
+      console.error("Fetch error:", error);
       Swal.fire({
         title: "Error",
-        text: error,
+        text: error.message,
         icon: "error",
         showConfirmButton: false,
         timer: 1825,
